@@ -1,0 +1,189 @@
+@font-face {
+    font-family: 'Facebook'; /* Name of the font you want to use */
+    src: url('fonts/FacebookSansRegular.ttf') format('truetype'); /* Update the path and format as needed */
+    font-weight: normal; /* Specify the weight */
+    font-style: normal; /* Specify the style */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Facebook';
+
+}
+
+
+
+
+
+.rootBody {
+    width: 360px;
+    /* background-color: red; */
+    /* padding: 10px; */
+    margin: auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+}
+
+.nameAndArrow {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+}
+
+.profileAndSearch {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+}
+
+.profileAndCoverSection {}
+
+.coverPhotoAndCameraIcon {
+    position: relative;
+
+}
+
+/* .coverPhoto{
+    height: 400px;
+} */
+
+.coverPhotoImage {
+    width: 100%;
+    object-fit: cover;
+    height: 220px;
+    
+}
+
+.cameraIcon {
+
+    border-radius: 100%;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    padding: 10px;
+}
+
+
+.cameraIconImage {
+    width: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+
+.profilePhotoAndCameraIcon {
+    position: relative;
+}
+
+.profilePhoto {}
+
+.profilePhotoImage {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 4px solid white;
+    margin-top: -125px;
+    margin-left: 15px;
+}
+
+
+
+.cameraIconForProfile {
+
+    border-radius: 100%;
+    position: absolute;
+
+    top: 0;
+    left: 140px;
+
+
+    background-color: white;
+    padding: 10px;
+}
+
+
+.cameraIconImageForProfile {
+    width: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+
+.bioSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7px;
+    align-items: start;
+    margin-top: 3px;
+    font-weight: bolder;
+    margin-left: 19px;
+}
+
+
+
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    margin: 19px;
+}
+
+
+
+.addStory{
+    display: flex;
+    align-items: center;
+    background-color: #1B74E4; /* Facebook's green color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.plusSign{
+    font-size: 20px; /* Size of the plus sign */
+    margin-right: 5px; /* Space between plus sign and text */
+}
+
+.editProfile{
+    align-items: center;
+    background-color: #E4E6EB; /* Facebook's green color */
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.treeDot{
+    align-items: center;
+    background-color: #E4E6EB; /* Facebook's green color */
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
