@@ -1,19 +1,13 @@
-@font-face {
-    font-family: 'Facebook'; /* Name of the font you want to use */
-    src: url('fonts/FacebookSansRegular.ttf') format('truetype'); /* Update the path and format as needed */
-    font-weight: normal; /* Specify the weight */
-    font-style: normal; /* Specify the style */
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Facebook';
-
+    font-family: 'Roboto';
 }
 
-
+body {
+    background-color: black;
+}
 
 
 
@@ -22,6 +16,7 @@
     /* background-color: red; */
     /* padding: 10px; */
     margin: auto;
+    background-color: white;
 }
 
 .top {
@@ -30,19 +25,48 @@
     align-items: center;
     padding: 10px;
     background-color: white;
+    border-bottom: 1px solid #C9CCD1;
+
 }
 
 .nameAndArrow {
     display: flex;
-    gap: 15px;
+    gap: 17px;
     font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow img {
+    margin-top: 3px;
+    width: 20px;
+    align-self: center;
 }
 
 .profileAndSearch {
     display: flex;
-    gap: 15px;
+    gap: 25px;
     font-weight: bold;
+    justify-content: center;
+    align-items: center;
 }
+
+
+.search img {
+    margin-top: 3px;
+    width: 20px;
+    align-self: center;
+}
+
+.profile {
+    color: #1877F3;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+
+
+
 
 .profileAndCoverSection {}
 
@@ -58,25 +82,25 @@
 .coverPhotoImage {
     width: 100%;
     object-fit: cover;
-    height: 220px;
-    
+    height: 160px;
+
 }
 
 .cameraIcon {
 
     border-radius: 100%;
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    padding: 10px;
+    bottom: 10px;
+    right: 10px;
+    /* background-color: white; */
+    /* padding: 10px; */
 }
 
 
 .cameraIconImage {
     width: 100%;
-    width: 20px;
-    height: 20px;
+    width: 37px;
+    height: 37px;
 }
 
 
@@ -87,13 +111,13 @@
 .profilePhoto {}
 
 .profilePhotoImage {
-    width: 175px;
-    height: 175px;
+    width: 145px;
+    height: 145px;
     object-fit: cover;
     border-radius: 100%;
     border: 4px solid white;
-    margin-top: -125px;
-    margin-left: 15px;
+    margin-top: -105px;
+    margin-left: 18px;
 }
 
 
@@ -102,24 +126,31 @@
 
     border-radius: 100%;
     position: absolute;
+    top: -2px;
+    left: 115px;
+    /* background: white; */
 
-    top: 0;
-    left: 140px;
 
-
-    background-color: white;
-    padding: 10px;
 }
 
 
 .cameraIconImageForProfile {
     width: 100%;
-    width: 20px;
-    height: 20px;
+    width: 37px;
+    height: 37px;
+    border: 2px solid white;
+    border-radius: 100%;
+    box-shadow: inset 0 0 0 4px rgb(255, 255, 255);
+    /* Creates a 4px white inner border */
 }
 
 
-.bioSection{
+.name {
+    font-size: 14px;
+}
+
+
+.bioSection {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -132,58 +163,396 @@
 
 
 
+#friendsText {
+    color: #65676B;
+    font-weight: normal;
+}
 
-.buttons{
-    display: flex;
-    justify-content: space-between;
-    margin: 19px;
+.bio {
+    font-weight: normal;
 }
 
 
 
-.addStory{
+.buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 17px 19px;
+    /* gap: 6px; */
+    justify-content: space-between;
+    gap: 5px;
+}
+
+
+
+.addStory {
     display: flex;
     align-items: center;
-    background-color: #1B74E4; /* Facebook's green color */
+    background-color: #1B74E4;
+    /* Facebook's green color */
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 14px;
+    padding: 0px 22px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    justify-content: space-between;
 }
 
 
-.plusSign{
-    font-size: 20px; /* Size of the plus sign */
-    margin-right: 5px; /* Space between plus sign and text */
+.plusSign {
+    align-self: center;
+    /* font-size: 20px; */
+    /* Size of the plus sign */
+    margin-right: 5px;
+    /* Space between plus sign and text */
+    width: 15px;
+    /* height: 10px; */
 }
 
-.editProfile{
+.plusSign img {
+    width: 90%;
+    margin-top: 2px;
+
+}
+
+.editProfile {
+    display: flex;
     align-items: center;
-    background-color: #E4E6EB; /* Facebook's green color */
+    background-color: #E4E6EB;
+    /* Facebook's green color */
     color: black;
     border: none;
     border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 14px;
+    padding: 0px 22px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 
-.treeDot{
-    align-items: center;
-    background-color: #E4E6EB; /* Facebook's green color */
-    color: black;
+
+.pencilSign {
+    width: 15px;
+    align-self: center;
+}
+
+.pencilSign img {
+    width: 100%;
+    margin-top: 2px;
+}
+
+
+
+
+
+
+
+.treeDot {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    background-color: #E4E6EB;
+    /* Facebook's green color */
     border: none;
     border-radius: 8px;
     padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+
+
+#dots {
+    color: black;
+    margin-top: -10px;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -2px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabs container */
+.tabs-container {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+/* Each tab */
+.tab {
+    padding: 15px;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    color: #65676B;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+}
+
+/* Active tab styles */
+.tab.active {
+    color: #1877F2;
+    /* Facebook blue */
+    border-bottom: 3px solid #1877F2;
+}
+
+/* Tab content */
+.tab-content {
+    display: none;
+    padding: 15px;
+    background-color: white;
+}
+
+/* Show active tab content */
+.tab-content.active {
+    display: block;
+}
+
+
+
+.styled-line {
+    border: 0;
+    /* Remove the default border */
+    height: 4px;
+    /* Set the thickness of the line */
+    background-color: #B0B3B8;
+    /* Set the line color */
+    /* Add some space above and below the line */
+    width: 100%;
+    /* Set the width of the line */
+}
+
+
+
+.lockedAccount {
+    display: flex;
+    margin: 19px;
+    gap: 15px;
+}
+
+#lockBolderText {
+    font-weight: bold;
+}
+
+#lockLinkText {
+    color: #1877F2;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.workList {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.workList img {
+    width: 20px;
+    align-self: baseline;
+}
+
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#afterIntro {
+    margin-top: 16px;
+    background-color: #ddd;
+    /* Change the color */
+    height: 1px;
+    /* Adjust the height */
+    border: none;
+    /* Remove default border */
+}
+
+.friends {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.friendsText {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.seeAllText {
+    color: #1877F2;
+}
+
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+}
+
+.statusUpdateSection {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.statusUpdateSection img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.postText {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.statusUpdate {
+    width: 70%;
+    background-color: #F0F2F5;
+    border-radius: 20px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.statusUpdate span {
+    padding-left: 10px;
+}
+
+.otherStatus {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    gap: 30px;
+    font-size: 14px;
+}
+
+.otherStatus img {
+    width: 15px;
+    height: 15px;
+}
+
+.photo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkIn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+.lifeEvent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.checkIn::after {
+    content: '';
+    /* Necessary for ::after to display */
+    position: absolute;
+    /* Absolute position relative to the parent (.checkIn) */
+    top: 0;
+    right: -20px;
+    /* Align the vertical line on the right */
+    width: 1px;
+    /* Set the thickness of the line */
+    height: 100%;
+    /* Full height of the parent */
+    background-color: #ddd;
+    /* Line color */
+}
+
+
+.checkIn::before {
+    content: '';
+    /* Necessary for ::after to display */
+    position: absolute;
+    /* Absolute position relative to the parent (.checkIn) */
+    top: 0;
+    left: -20px;
+    /* Align the vertical line on the right */
+    width: 1px;
+    /* Set the thickness of the line */
+    height: 100%;
+    /* Full height of the parent */
+    background-color: #ddd;
+    /* Line color */
+}
+
+
+
+.mobileFooter {
+    background-color: black;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+}
+
+.mobileFooter img {
+    width: 15px;
+    height: 15px;
+}
+
+
+.mobileTop {
+    /* background-color: rgb(150, 69, 69); */
+    display: flex;
+    height: 28px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    font-size: 12px;
+}
+
+
+.right img{
+    height: 20px;
+    width: 20px;
 }

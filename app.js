@@ -59,12 +59,6 @@ margin-left:1rem;
 
 
 
-
-
-
-
-
-
         `
     });
     // Load your original image (top.png)
