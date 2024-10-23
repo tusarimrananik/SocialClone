@@ -24,11 +24,28 @@
     <div id="result"></div>
 
     <script>
+
+
+
+
+
+        function isValidFacebookProfileUrl(url) {
+            const regex = /^(https?:\/\/)?(www\.|m\.|mbasic\.|web\.|business\.|l\.|developers\.|touch\.)?(facebook\.com)\/(profile\.php\?id=\d+|[a-zA-Z0-9.]+)$/;
+            return regex.test(url.trim()); // Validate trimmed URL
+        }
+
+
         // Handle form submission via AJAX
         document.getElementById('urlForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevent form from submitting the traditional way
-
             const urlInput = document.getElementById('url').value;
+
+            // Validate the URL input
+            if (!isValidFacebookProfileUrl(urlInput)) {
+                console.error('Invalid Facebook profile URL');
+                document.getElementById('result').innerHTML = 'Please enter a valid Facebook profile URL.';
+                return; // Stop further execution if the URL is invalid
+            }
 
             try {
                 // Send the form data via AJAX using fetch
@@ -44,12 +61,8 @@
                     throw new Error('Network response was not ok');
                 }
 
-
-
-
                 const result = await response.json();
-
-                console.log(result)
+                console.log(result);
 
                 // Create the image element
                 const img = document.createElement('img');
@@ -68,47 +81,16 @@
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(img);
                 resultDiv.appendChild(downloadLink);
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // // Get the image buffer from the response
-                // const imageBlob = await response.blob(); // Get the response as a Blob
-                // const imgUrl = URL.createObjectURL(imageBlob); // Create a URL from the Blob
-
-
-
-                // // Create the image element
-                // const img = document.createElement('img');
-                // img.src = imgUrl;
-                // img.alt = 'Generated Image';
-
-                // // Create a download link
-                // const downloadLink = document.createElement('a');
-                // downloadLink.href = imgUrl; // Use the Blob URL for downloading
-                // downloadLink.download = 'downloaded_image.png'; // Update to .png for image format
-                // downloadLink.innerHTML = '<button>Download Image</button>';
-
-                // // Display the image and download link in the result div
-                // const resultDiv = document.getElementById('result');
-                // resultDiv.innerHTML = ''; // Clear previous results
-                // resultDiv.appendChild(img);
-                // resultDiv.appendChild(downloadLink);
-
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('result').innerHTML = 'Error submitting the form!';
             }
         });
+
+
+
+
+
     </script>
 </body>
 

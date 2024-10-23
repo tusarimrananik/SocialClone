@@ -62,6 +62,7 @@ async function getProfileInfo(url) {
         await page.waitForSelector("[data-imgperflogname='profileCoverPhoto']", { timeout: 5000 }).catch(() => null);
         await page.waitForSelector(".x2b8uid span", { timeout: 5000 }).catch(() => null);
         await page.waitForSelector(".x193iq5w > a", { timeout: 5000 }).catch(() => null);
+        await page.waitForSelector('img.xz74otr[src="/images/wem/private_sharing/lp-badge-large-3x.png"]', { timeout: 1000 }).catch(() => null);
 
         // Evaluate the page and gather data
         const result = await page.evaluate(() => {
@@ -99,8 +100,17 @@ async function getProfileInfo(url) {
                     };
                 }
             }
+            const isLockedElement = document.querySelector('img.xz74otr[src="/images/wem/private_sharing/lp-badge-large-3x.png"]');
+            let isLocked
+            if (isLockedElement) {
+                isLocked = true;
+            } else {
+                isLocked = false;
 
-            return { name, subName, profilePicture, backgroundImage, bio, friendsCount };
+            }
+
+
+            return { name, subName, profilePicture, backgroundImage, bio, friendsCount, isLocked };
         });
 
         // Assign the result to the `infos` object
@@ -110,7 +120,8 @@ async function getProfileInfo(url) {
             profilePicture: result.profilePicture || null,
             backgroundImage: result.backgroundImage || null,
             bio: result.bio || null,
-            friendsCount: result.friendsCount || null
+            friendsCount: result.friendsCount || null,
+            isLocked: result.isLocked || null
         };
 
     } catch (error) {

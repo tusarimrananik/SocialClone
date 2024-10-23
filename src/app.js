@@ -10,7 +10,6 @@ require('dotenv').config(); // Load environment variables
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,26 +23,9 @@ app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
 
-
 app.get('/', (req, res) => {
     res.render('index');
 });
-const url = 'https://www.facebook.com/mumtak.samin.7';
-
-
-async function fetchAndSetProfileInfo(url) {
-    try {
-        const profileInfo = await getProfileInfo(url);
-
-        await setProfileInfo(profileInfo);
-
-
-    } catch (error) {
-        console.error('Error fetching or setting profile info:', error);
-    }
-}
-
-
 
 async function fetchAndSetProfileInfo(url) {
     try {
@@ -60,8 +42,6 @@ async function fetchAndSetProfileInfo(url) {
     }
 }
 
-
-
 app.post('/submit', async (req, res) => {
     const submittedUrl = req.body.url;
 
@@ -69,7 +49,7 @@ app.post('/submit', async (req, res) => {
         return res.status(400).json({ error: 'URL is required' });
     }
     try {
-        const imageBuffer = await fetchAndSetProfileInfo(url);
+        const imageBuffer = await fetchAndSetProfileInfo(submittedUrl);
         const imgSrc = `data:image/png;base64,${Buffer.from(imageBuffer).toString('base64')}`; // Directly convert buffer to base64
         res.json({ imgSrc });
     } catch (error) {
