@@ -32,18 +32,44 @@ app.get('/', (req, res) => {
 
 
 
-// Route to handle form submission (AJAX POST request)
 app.post('/submit', async (req, res) => {
     const submittedUrl = req.body.url;
 
-    let imageURL = await puppeteerRun(submittedUrl)
+    try {
+        const imageBuffer = await puppeteerRun(submittedUrl);
+        console.log('Buffer length:', imageBuffer.length);
+        fs.writeFileSync('screenshot.png', imageBuffer); // Save the image to a file
 
-    res.json({ url: imageURL });
+
+
+
+        // Convert the buffer to a Base64 string
+        const imageBase64 = Buffer.from(imageBuffer).toString('base64');
+        // console.log(imageBuffer)
+        // // console.log(imageBase64)
+
+        console.log(Buffer.isBuffer(imageBuffer)); // Should log 'true'
+        // console.log(imageBuffer.toString('base64')); // Log the Base64 encoded string
+
+        const imgSrc = `data:image/png;base64,${imageBase64}`; // Create a data URL
+
+        res.json({ imgSrc }); // Send the data URL as a response
+
+
+
+
+
+
+
+
+        // Set the response headers for the image
+        // res.setHeader('Content-Type', 'image/png');
+        // res.send(imageBuffer); // Send the image buffer directly
+    } catch (error) {
+        console.error('Error taking screenshot:', error);
+        res.status(500).json({ error: 'Failed to take screenshot' });
+    }
 });
-
-
-
-
 
 
 
@@ -200,154 +226,24 @@ async function puppeteerRun(url) {
     // Optionally, wait for the new image to load
     // await page.waitForSelector('img[src="' + newImageSrc + '"]');
 
-    const element = await page.$('.rootBody');
     await delay(3000);
 
 
-    const screenshotPath = path.join(publicDir, 'div-screenshot.png');
+    const element = await page.$('.rootBody');
+
+    // Take a screenshot and store it in a buffer
+    const screenshotBuffer = await element.screenshot();
 
 
 
-    await element.screenshot({ path: screenshotPath });
-    const imageUrl = `./div-screenshot.png`;
+
+
+
+
+
+
     await browser.close();
-    return imageUrl;
+    return screenshotBuffer;  // Return the image buffer directly
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     const profilePictureSelector = 'img'; // Example selector
-//     // Wait for the profile picture to be loaded
-//     await page.waitForSelector(profilePictureSelector, { timeout: 10000 }); // 10 seconds timeout
-//     await new Promise(resolve => setTimeout(resolve, 2000));
-//     await page.addStyleTag({
-//         content: `
-// body{
-//     overflow: hidden;
-// }
-// .m.fixed-container.bottom{
-// display: none;
-// }
-
-
-// #screen-root > div > div:nth-child(2) > div:nth-child(4) > div:nth-child(7){
-// margin-left:1rem;
-// }
-//         `
-//     });
-//     // Load your original image (top.png)
-//     const originalImagePath = './images/topold.png'; // Use your file path here
-//     // Create an SVG overlay with the current time
-//     const timeSvg = `
-//   <svg width="360" height="35">
-//     <text x="17" y="21" font-size="14" font-weight="bold" fill="#888" font-family="Arial, sans-serif">${currentTime}</text>
-//   </svg>
-// `;
-//     // Composite the time on top of the original image
-//     sharp(originalImagePath)
-//         .composite([
-//             {
-//                 input: Buffer.from(timeSvg), // Dynamic time SVG
-//                 top: 0, // Position it appropriately on the image
-//                 left: 0
-//             }
-//         ])
-//         .png() // Output as PNG
-//         .toFile('./images/top.png', (err, info) => {
-//             if (err) throw err;
-//             console.log('Dynamic time status bar created:', info);
-//         });
-
-
-
-
-
-
-
-
-
-//     await page.screenshot({ path: 'screenshot.png' });
-//     await browser.close();
-
-// const imageTopPath = './images/top.png';
-// const imageMiddlePath = 'screenshot.png';
-// const imageBottomPath = './images/bottom.png';
-// // Read all the images
-// Promise.all([
-//     sharp(imageTopPath).metadata(),
-//     sharp(imageMiddlePath).metadata(),
-//     sharp(imageBottomPath).metadata(),
-// ]).then(async ([topMeta, middleMeta, bottomMeta]) => {
-//     // Calculate the total height and max width for the new image
-//     const totalHeight = topMeta.height + middleMeta.height + bottomMeta.height;
-//     const maxWidth = Math.max(topMeta.width, middleMeta.width, bottomMeta.width);
-//     // Create a blank canvas with the correct width and total height
-//     const canvas = sharp({
-//         create: {
-//             width: maxWidth,
-//             height: totalHeight,
-//             channels: 4, // RGBA
-//             background: { r: 0, g: 0, b: 0, alpha: 0 } // transparent background
-//         }
-//     });
-//     // Composite the three images at the correct positions
-//     const compositeImage = await canvas
-//         .composite([
-//             { input: imageTopPath, top: 0, left: 0 }, // Top image
-//             { input: imageMiddlePath, top: topMeta.height, left: 0 }, // Middle image
-//             { input: imageBottomPath, top: topMeta.height + middleMeta.height, left: 0 }, // Bottom image
-//         ])
-//         .png() // Save as PNG
-//         .toFile('merged-image.png');
-
-//     console.log('Images merged successfully!');
-// }).catch(err => {
-//     console.error('Error:', err);
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

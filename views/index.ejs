@@ -4,18 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit a Link</title>
+    <title>Image Generator</title>
+    <style>
+        #result img {
+            max-width: 400px;
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Submit a Link</h1>
+    <h1>Generate Image from URL</h1>
     <form id="urlForm">
-        <label for="url">Enter a URL:</label>
-        <input type="text" id="url" name="url" placeholder="https://example.com" required>
+        <input type="text" id="url" placeholder="Enter URL" required>
         <button type="submit">Submit</button>
     </form>
 
-    <!-- This will display the result -->
     <div id="result"></div>
 
     <script>
@@ -35,23 +40,69 @@
                     body: JSON.stringify({ url: urlInput })
                 });
 
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+
+
+
                 const result = await response.json();
 
                 console.log(result)
+
+                // Create the image element
                 const img = document.createElement('img');
-                img.src = result.url; 
+                img.src = result.imgSrc; // Use the Base64 image source
                 img.alt = 'Generated Image';
                 img.style.maxWidth = '400px';
 
+                // Create a download link
                 const downloadLink = document.createElement('a');
-                downloadLink.href = result.url;
-                downloadLink.download = 'downloaded_image.jpg'; 
+                downloadLink.href = result.imgSrc; // Use the Base64 string for downloading
+                downloadLink.download = 'downloaded_image.png'; // Update to .png for image format
                 downloadLink.innerHTML = '<button>Download Image</button>';
 
+                // Display the image and download link in the result div
                 const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = '';  
+                resultDiv.innerHTML = '';
                 resultDiv.appendChild(img);
                 resultDiv.appendChild(downloadLink);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // // Get the image buffer from the response
+                // const imageBlob = await response.blob(); // Get the response as a Blob
+                // const imgUrl = URL.createObjectURL(imageBlob); // Create a URL from the Blob
+
+
+
+                // // Create the image element
+                // const img = document.createElement('img');
+                // img.src = imgUrl;
+                // img.alt = 'Generated Image';
+
+                // // Create a download link
+                // const downloadLink = document.createElement('a');
+                // downloadLink.href = imgUrl; // Use the Blob URL for downloading
+                // downloadLink.download = 'downloaded_image.png'; // Update to .png for image format
+                // downloadLink.innerHTML = '<button>Download Image</button>';
+
+                // // Display the image and download link in the result div
+                // const resultDiv = document.getElementById('result');
+                // resultDiv.innerHTML = ''; // Clear previous results
+                // resultDiv.appendChild(img);
+                // resultDiv.appendChild(downloadLink);
 
             } catch (error) {
                 console.error('Error:', error);
