@@ -38,7 +38,6 @@ app.post('/submit', async (req, res) => {
     try {
         const imageBuffer = await puppeteerRun(submittedUrl);
         console.log('Buffer length:', imageBuffer.length);
-        fs.writeFileSync('screenshot.png', imageBuffer); // Save the image to a file
 
 
 
