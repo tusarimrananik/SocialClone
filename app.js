@@ -80,127 +80,132 @@ async function puppeteerRun(url) {
         height: dimensions.height,
     });
 
-    const cookies = [
-        {
-            name: 'c_user',
-            value: process.env.FB_COOKIE_C_USER,
-            domain: '.facebook.com',
-            path: '/',
-            httpOnly: true,
-            secure: true,
-        },
-        {
-            name: 'xs',
-            value: process.env.FB_COOKIE_XS,
-            domain: '.facebook.com',
-            path: '/',
-            httpOnly: true,
-            secure: true,
-        },
-    ];
-    // Apply the cookies
-    await page.setCookie(...cookies);
+
+    await page.goto(`www.google.com`)
+
+    // const cookies = [
+    //     {
+    //         name: 'c_user',
+    //         // value: process.env.FB_COOKIE_C_USER,
+    //         domain: '.facebook.com',
+    //         path: '/',
+    //         httpOnly: true,
+    //         secure: true,
+    //     },
+    //     {
+    //         name: 'xs',
+    //         // value: process.env.FB_COOKIE_XS,
+    //         domain: '.facebook.com',
+    //         path: '/',
+    //         httpOnly: true,
+    //         secure: true,
+    //     },
+    // ];
+    // // Apply the cookies
+    // await page.setCookie(...cookies);
 
     // Navigate to Facebook
-    await page.goto(`${url}`, { waitUntil: 'domcontentloaded' });
+    // await page.goto(`${url}`, { waitUntil: 'domcontentloaded' });
 
-    let infos = {}
+    // let infos = {}
 
-    await page.waitForSelector('h1');
-    const splitText = await page.evaluate(() => {
-        const inputText = document.querySelector('h1').innerText;
-        return inputText.split(/[\(\)]/).map(text => text.trim()).filter(text => text);
-    });
+    // await page.waitForSelector('h1');
+    // const splitText = await page.evaluate(() => {
+    //     const inputText = document.querySelector('h1').innerText;
+    //     return inputText.split(/[\(\)]/).map(text => text.trim()).filter(text => text);
+    // });
 
-    infos.name = splitText[0]
-    infos.subName = splitText[1]
-
-
-
-    await page.waitForSelector('.x1rg5ohu image');
-    infos.profilePicture = await page.evaluate(() => {
-        const elements = document.querySelectorAll('.x1rg5ohu image');
-        if (elements[1]) {
-            const imageSrc = elements[1].getAttributeNS('http://www.w3.org/1999/xlink', 'href');
-            return imageSrc;
-        }
-        return null;
-    });
+    // infos.name = splitText[0]
+    // infos.subName = splitText[1]
 
 
 
-
-    await page.waitForSelector("[data-imgperflogname='profileCoverPhoto']");
-    infos.backgroundImage = await page.evaluate(() => {
-        return document.querySelector("[data-imgperflogname='profileCoverPhoto']").src;
-    });
+    // await page.waitForSelector('.x1rg5ohu image');
+    // infos.profilePicture = await page.evaluate(() => {
+    //     const elements = document.querySelectorAll('.x1rg5ohu image');
+    //     if (elements[1]) {
+    //         const imageSrc = elements[1].getAttributeNS('http://www.w3.org/1999/xlink', 'href');
+    //         return imageSrc;
+    //     }
+    //     return null;
+    // });
 
 
 
 
-    await page.waitForSelector(".x2b8uid span");
-    infos.bio = await page.evaluate(() => {
-        return document.querySelector(".x2b8uid span").innerHTML;
-    });
+    // await page.waitForSelector("[data-imgperflogname='profileCoverPhoto']");
+    // infos.backgroundImage = await page.evaluate(() => {
+    //     return document.querySelector("[data-imgperflogname='profileCoverPhoto']").src;
+    // });
 
 
-    await page.waitForSelector(".x193iq5w > a");
-    infos.friendsCount = await page.evaluate(() => {
-        let str = document.querySelector(".x193iq5w > a").innerText;
-        const hasFriendsOrFollower = str.includes('friends') || str.includes('follower');
-        if (!hasFriendsOrFollower) {
-            return;
-        }
-        return str.split(' ')[0];
-    });
 
-    console.log(infos)
-    await page.goto(`file://${filePath}`, { waitUntil: 'domcontentloaded' });
 
-    await page.evaluate((infos) => {
-        const profilePic = document.querySelector('.profilePhotoImage');
-        const name = document.querySelector('#name');
-        const coverPic = document.querySelector('.coverPhotoImage');
-        const statusPic = document.querySelector('#statusPic');
-        const mainName = document.querySelector('#mainName');
-        const bio = document.querySelector('#bio');
-        const friendsNumber = document.querySelector('#friendsNumber');
-        const friendsText = document.querySelector('#friendsText');
+    // await page.waitForSelector(".x2b8uid span");
+    // infos.bio = await page.evaluate(() => {
+    //     return document.querySelector(".x2b8uid span").innerHTML;
+    // });
 
-        if (name) {
-            name.textContent = infos.name.split(' ').slice(0, 3).join(' ');
-        }
-        if (mainName) {
-            mainName.textContent = infos.name;
-        }
-        if (profilePic) {
-            profilePic.src = infos.profilePicture;
-        }
 
-        if (statusPic) {
-            statusPic.src = infos.profilePicture;
-        }
+    // await page.waitForSelector(".x193iq5w > a");
+    // infos.friendsCount = await page.evaluate(() => {
+    //     let str = document.querySelector(".x193iq5w > a").innerText;
+    //     const hasFriendsOrFollower = str.includes('friends') || str.includes('follower');
+    //     if (!hasFriendsOrFollower) {
+    //         return;
+    //     }
+    //     return str.split(' ')[0];
+    // });
 
-        if (coverPic) {
-            coverPic.src = infos.backgroundImage;
-        }
-        if (bio) {
-            bio.innerHTML = infos.bio;
-        }
-        if (friendsNumber && infos.friendsCount) {
-            friendsNumber.innerText = infos.friendsCount;
-        } else {
-            friendsNumber.classList.add("hidden");
-            friendsText.classList.add("hidden");
+    // console.log(infos)
+    // await page.goto(`file://${filePath}`, { waitUntil: 'domcontentloaded' });
 
-        }
+    // await page.evaluate((infos) => {
+    //     const profilePic = document.querySelector('.profilePhotoImage');
+    //     const name = document.querySelector('#name');
+    //     const coverPic = document.querySelector('.coverPhotoImage');
+    //     const statusPic = document.querySelector('#statusPic');
+    //     const mainName = document.querySelector('#mainName');
+    //     const bio = document.querySelector('#bio');
+    //     const friendsNumber = document.querySelector('#friendsNumber');
+    //     const friendsText = document.querySelector('#friendsText');
 
-    }, infos);
+    //     if (name) {
+    //         name.textContent = infos.name.split(' ').slice(0, 3).join(' ');
+    //     }
+    //     if (mainName) {
+    //         mainName.textContent = infos.name;
+    //     }
+    //     if (profilePic) {
+    //         profilePic.src = infos.profilePicture;
+    //     }
 
-    // Optionally, wait for the new image to load
-    // await page.waitForSelector('img[src="' + newImageSrc + '"]');
+    //     if (statusPic) {
+    //         statusPic.src = infos.profilePicture;
+    //     }
 
-    const element = await page.$('.rootBody');
+    //     if (coverPic) {
+    //         coverPic.src = infos.backgroundImage;
+    //     }
+    //     if (bio) {
+    //         bio.innerHTML = infos.bio;
+    //     }
+    //     if (friendsNumber && infos.friendsCount) {
+    //         friendsNumber.innerText = infos.friendsCount;
+    //     } else {
+    //         friendsNumber.classList.add("hidden");
+    //         friendsText.classList.add("hidden");
+
+    //     }
+
+    // }, infos);
+
+    // // Optionally, wait for the new image to load
+    // // await page.waitForSelector('img[src="' + newImageSrc + '"]');
+
+    // const element = await page.$('.rootBody');
+    const element = await page.$('body');
+
     await delay(3000);
 
 
