@@ -63,7 +63,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 async function puppeteerRun(url) {
 
     const browser = await puppeteer.launch({
-        headless: true, args: ['--start-maximized']
+        headless: true
     });
 
     const [page] = await browser.pages();

@@ -12,8 +12,8 @@
 FROM ghcr.io/puppeteer/puppeteer:23.6.0
 
 # Set environment variables to skip Chromium download and specify the Chrome executable
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+#     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
