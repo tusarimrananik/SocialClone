@@ -1,19 +1,69 @@
 const puppeteer = require('puppeteer');
-const sharp = require('sharp');
 const path = require('path');
-const { title } = require('process');
-const { info } = require('console');
+const fs = require('fs');
+
 const filePath = path.resolve(__dirname, './FB_UI/index.html');
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+
+
+const publicDir = path.join(__dirname, 'public');
+if (!fs.existsSync(publicDir)) {
+    fs.mkdirSync(publicDir);  // Create the directory if it doesn't exist
+}
+
+app.use(express.json());
+app.use(express.static(publicDir));
+
+
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
+
+
+
+
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+
+
+
+// Route to handle form submission (AJAX POST request)
+app.post('/submit', async (req, res) => {
+    const submittedUrl = req.body.url;
+
+    let imageURL = await puppeteerRun(submittedUrl)
+
+    res.json({ url: imageURL });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-require('dotenv').config();
-(async () => {
 
-
-
+async function puppeteerRun(url) {
 
     const browser = await puppeteer.launch({
-        headless: false, args: ['--start-maximized']
+        headless: true, args: ['--start-maximized']
     });
 
     const [page] = await browser.pages();
@@ -29,9 +79,6 @@ require('dotenv').config();
         width: dimensions.width,
         height: dimensions.height,
     });
-
-
-
 
     const cookies = [
         {
@@ -54,15 +101,10 @@ require('dotenv').config();
     // Apply the cookies
     await page.setCookie(...cookies);
 
-
-
     // Navigate to Facebook
-    await page.goto(`${process.env.FB_UID}`, { waitUntil: 'domcontentloaded' });
-
-
+    await page.goto(`${url}`, { waitUntil: 'domcontentloaded' });
 
     let infos = {}
-
 
     await page.waitForSelector('h1');
     const splitText = await page.evaluate(() => {
@@ -112,26 +154,8 @@ require('dotenv').config();
         return str.split(' ')[0];
     });
 
-
-
-
-
     console.log(infos)
-
-
-
-
-
-
-
-
-
-
-
-
     await page.goto(`file://${filePath}`, { waitUntil: 'domcontentloaded' });
-
-
 
     await page.evaluate((infos) => {
         const profilePic = document.querySelector('.profilePhotoImage');
@@ -176,45 +200,20 @@ require('dotenv').config();
     // Optionally, wait for the new image to load
     // await page.waitForSelector('img[src="' + newImageSrc + '"]');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const element = await page.$('.rootBody');
     await delay(3000);
-    await element.screenshot({ path: 'div-screenshot.png' });
-    // await browser.close();
+
+
+    const screenshotPath = path.join(publicDir, 'div-screenshot.png');
 
 
 
+    await element.screenshot({ path: screenshotPath });
+    const imageUrl = `./div-screenshot.png`;
+    await browser.close();
+    return imageUrl;
+}
 
-
-
-
-
-
-
-
-
-})();
 
 
 
@@ -296,22 +295,6 @@ require('dotenv').config();
 
 //     await page.screenshot({ path: 'screenshot.png' });
 //     await browser.close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const imageTopPath = './images/top.png';
 // const imageMiddlePath = 'screenshot.png';
