@@ -8,12 +8,12 @@
     "start": "nodemon src/app.js"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
-    "express": "^4.21.1",
-    "luxon": "^3.5.0",
-    "nodemon": "^3.1.7",
-    "puppeteer": "^23.6.0",
-    "sharp": "^0.33.5"
+    "dotenv": "16.4.5",
+    "ejs": "3.1.10",
+    "express": "4.21.1",
+    "luxon": "3.5.0",
+    "nodemon": "3.1.7",
+    "puppeteer": "23.6.0",
+    "sharp": "0.33.5"
   }
 }

@@ -29,9 +29,12 @@
 
 
 
+
+
+
         function isValidFacebookProfileUrl(url) {
-            const regex = /^(https?:\/\/)?(www\.|m\.|mbasic\.|web\.|business\.|l\.|developers\.|touch\.)?(facebook\.com)\/(profile\.php\?id=\d+|[a-zA-Z0-9.]+)$/;
-            return regex.test(url.trim()); // Validate trimmed URL
+            const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)?(facebook\.com|fb\.com)\/.+$/;
+            return regex.test(url.trim());
         }
 
 

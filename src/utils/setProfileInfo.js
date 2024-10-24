@@ -52,7 +52,7 @@ async function setProfileInfo(profileData) {
 
 async function setData(profileData, page) {
     await page.evaluate(async (profileData) => {
-        const { name, profilePicture, backgroundImage, bio, friendsCount, isLocked } = profileData;
+        const { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory } = profileData;
         const profilePicElement = document.querySelector('.profilePhotoImage');
         const displayNameElement = document.querySelector('#name');
         const coverPhotoElement = document.querySelector('.coverPhotoImage');
@@ -60,8 +60,10 @@ async function setData(profileData, page) {
         const mainNameElement = document.querySelector('#mainName');
         const bioElement = document.querySelector('#bio');
         const friendsCountElement = document.querySelector('#friendsNumber');
+        const friendsText = document.querySelector('#friendsText');
         const friendsTextElement = document.querySelector('#friendsText');
         const isLockedElement = document.querySelector('#isLocked');
+
 
         // Utility function to wait for an element to be visible
         async function waitForElementVisibility(element) {
@@ -132,8 +134,10 @@ async function setData(profileData, page) {
         // Update friends count
         if (friendsCountElement) {
             if (friendsCount) {
-                friendsCountElement.innerText = friendsCount.count;
+                friendsCountElement.innerText = friendsCount.count.toUpperCase();
+                friendsText.innerText = friendsCount.type;
                 await waitForElementVisibility(friendsCountElement); // Wait for friends count to be visible
+                await waitForElementVisibility(friendsText); // Wait for friends count to be visible
             } else {
                 friendsCountElement.classList.add('hidden');
                 if (friendsTextElement) {
@@ -149,6 +153,13 @@ async function setData(profileData, page) {
             await waitForElementVisibility(isLockedElement); // Wait for bio to be visible
         } else if (isLockedElement) {
             isLockedElement.classList.add('hidden');
+        }
+
+
+        if (hasStory) {
+            profilePicElement.classList.add('hasStory')
+        } else {
+            profilePicElement.classList.remove('hasStory');
         }
 
 
