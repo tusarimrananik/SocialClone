@@ -4,7 +4,7 @@ const filePath = "https://tusarimrananik.github.io/FacebookUI/";
 async function setProfileInfo(profileData) {
     const browser = await puppeteer.launch({
         headless: true,
-        args: ['--start-maximized']
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--single-process', '--no-zygote']
     });
     const [page] = await browser.pages();
 
