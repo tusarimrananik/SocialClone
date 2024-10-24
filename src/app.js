@@ -13,6 +13,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Set view engine
 app.set('views', path.join(__dirname, 'views')); // Ensure this path is correct
@@ -25,6 +26,12 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+
+
+app.get('/show', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/facebook_ui/index.html'));
 });
 
 async function fetchAndSetProfileInfo(url) {
