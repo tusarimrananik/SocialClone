@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 
-const filePath = path.join(__dirname, '../../public/facebook_ui/index.html');
+// const filePath = path.join(__dirname, '../../public/facebook_ui/index.html');
+const filePath = path.join(process.cwd(), 'public/facebook_ui/index.html');
+console.log(filePath);  // To confirm the path
 
 async function setProfileInfo(profileData) {
     const browser = await puppeteer.launch({
