@@ -30,9 +30,6 @@ app.get('/', (req, res) => {
 
 
 
-app.get('/show', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/facebook_ui/index.html'));
-});
 
 async function fetchAndSetProfileInfo(url) {
     try {
