@@ -6,7 +6,8 @@ async function getProfileInfo(url) {
     let infos = {};
 
     const browser = await puppeteer.launch({
-        headless: true, args: ['--start-maximized'],
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
     const [page] = await browser.pages();
