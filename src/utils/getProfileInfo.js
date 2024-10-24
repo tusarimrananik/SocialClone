@@ -3,7 +3,6 @@ const puppeteer = require('puppeteer');
 require('dotenv').config();
 
 async function getProfileInfo(url) {
-    console.log('working')
     let infos = {};
 
     const browser = await puppeteer.launch({
@@ -45,7 +44,6 @@ async function getProfileInfo(url) {
     ];
     try {
         await page.setCookie(...cookies);
-        console.log("Cookies set successfully.");
     } catch (error) {
         console.error("Error occurred while setting cookies: ", error);
     }
@@ -59,13 +57,23 @@ async function getProfileInfo(url) {
     try {
         // Define selectors
         const selectors = {
+
+
             nameHeader: 'h1',
+
             profilePicture: '.x1rg5ohu image',
+
             coverPhoto: "[data-imgperflogname='profileCoverPhoto']",
-            bio: "#mount_0_0_8M > div > div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div.x6s0dn4.x78zum5.xdt5ytf.x193iq5w > div.x9f619.x193iq5w.x1talbiv.x1sltb1f.x3fxtfs.x1swvt13.x1pi30zi.xw7yly9 > div > div.x9f619.x1n2onr6.x1ja2u2z.xeuugli.xs83m0k.xjl7jj.x1xmf6yo.x1emribx.x1e56ztr.x1i64zmx.xnp8db0.x1d1medc.x7ep2pv.x1xzczws > div.x7wzq59 > div > div:nth-child(1) > div > div > div > div > div.xieb3on > div:nth-child(1) > div > div > span",
+
+            bio: "div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div.x6s0dn4.x78zum5.xdt5ytf.x193iq5w > div.x9f619.x193iq5w.x1talbiv.x1sltb1f.x3fxtfs.x1swvt13.x1pi30zi.xw7yly9 > div > div.x9f619.x1n2onr6.x1ja2u2z.xeuugli.xs83m0k.xjl7jj.x1xmf6yo.x1emribx.x1e56ztr.x1i64zmx.xnp8db0.x1d1medc.x7ep2pv.x1xzczws > div.x7wzq59 > div > div:nth-child(1) > div > div > div > div > div.xieb3on > div:nth-child(1) > div > div > span",
+
             friendsCount: ".x193iq5w > a",
+
             isLockedBadge: 'img.xz74otr[src="/images/wem/private_sharing/lp-badge-large-3x.png"]',
+
             hasStory: 'div > div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div:nth-child(1) > div.x9f619.x1ja2u2z.x78zum5.x2lah0s.x1n2onr6.xl56j7k.x1qjc9v5.xozqiw3.x1q0g3np.x1l90r2v.x1ve1bff > div > div > div > div.x15sbx0n.x1xy773u.x390vds.xb2vh1x.x14xzxk9.x18u1y24.xs6kywh.x5wy4b0 > div > div > div > svg > g > circle.x1p5r69i.x17ld789'
+
+
         };
 
         // Wait for all selectors with a single timeout management
@@ -83,7 +91,7 @@ async function getProfileInfo(url) {
         const result = await page.evaluate((selectors) => {
             // Header (name and subName)
             const h1Text = document.querySelector(selectors.nameHeader)?.innerText || '';
-            const [name, subName] = h1Text.split(/[\(\)]/).map(text => text.trim());
+            const name = h1Text.trim();
 
             // Profile picture (second image)
             const profileElements = document.querySelectorAll(selectors.profilePicture);
@@ -126,13 +134,12 @@ async function getProfileInfo(url) {
             const hasStoryElement = document.querySelector(selectors.hasStory);
             const hasStory = !!hasStoryElement; // Boolean check
 
-            return { name, subName, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory };
+            return { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory };
         }, selectors);
 
         // Assign the result to the `infos` object
         infos = {
             name: result.name || null,
-            subName: result.subName || null,
             profilePicture: result.profilePicture || null,
             backgroundImage: result.backgroundImage || null,
             bio: result.bio || null,

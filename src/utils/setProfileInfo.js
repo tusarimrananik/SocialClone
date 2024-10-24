@@ -32,29 +32,11 @@ async function setProfileInfo(profileData) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function setData(profileData, page) {
     await page.evaluate(async (profileData) => {
         const { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory } = profileData;
         const profilePicElement = document.querySelector('.profilePhotoImage');
-        const displayNameElement = document.querySelector('#name');
+        const displayNameElement = document.querySelector('.nameTop');
         const coverPhotoElement = document.querySelector('.coverPhotoImage');
         const statusPicElement = document.querySelector('#statusPic');
         const mainNameElement = document.querySelector('#mainName');
@@ -92,13 +74,13 @@ async function setData(profileData, page) {
 
         // Update display name (first 3 words)
         if (name && displayNameElement) {
-            displayNameElement.textContent = name.split(' ').slice(0, 3).join(' ');
+            displayNameElement.textContent = name.replace(/\(.*?\)/g, '').trim().replace(/\s+/g, ' ').split(' ').slice(0, 3).join(' ');
             await waitForElementVisibility(displayNameElement); // Wait for display name to be visible
         }
 
         // Update main name
         if (name && mainNameElement) {
-            mainNameElement.textContent = name;
+            mainNameElement.textContent = name.trim().replace(/\s+/g, ' ')
             await waitForElementVisibility(mainNameElement); // Wait for main name to be visible
         }
 
@@ -167,7 +149,6 @@ async function setData(profileData, page) {
 
     }, profileData);
 
-    console.log("Profile information has been set successfully!");
 
     // Take a screenshot after attempting to ensure all elements are visible
     const screenshotBuffer = await takeScreenshot(page);

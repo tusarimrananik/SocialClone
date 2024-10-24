@@ -15,199 +15,38 @@ body {
 
 
 .rootBody {
-    width: 360px;
-    /* background-color: red; */
-    /* padding: 10px; */
+    width: 400px;
+    max-height: 800px;
     margin: 0;
     background-color: white;
+    position: relative;
+    overflow: hidden;
 }
 
-.top {
+.mobileFooter {
+    background-color: black;
+    height: 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: white;
-    border-bottom: 1px solid #C9CCD1;
-
-}
-
-.nameAndArrow {
-    display: flex;
-    gap: 17px;
-    font-weight: bold;
     justify-content: center;
     align-items: center;
-}
-
-.arrow img {
-    margin-top: 3px;
-    width: 20px;
-    align-self: center;
-}
-
-.profileAndSearch {
-    display: flex;
-    gap: 25px;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.search img {
-    margin-top: 3px;
-    width: 20px;
-    align-self: center;
-}
-
-.profile {
-    color: #1877F3;
-    font-weight: normal;
-    font-size: 16px;
-}
-
-
-
-
-
-.profileAndCoverSection {}
-
-.coverPhotoAndCameraIcon {
-    position: relative;
-
-}
-
-/* .coverPhoto{
-    height: 400px;
-} */
-
-.coverPhotoImage {
-    width: 100%;
-    object-fit: cover;
-    height: 160px;
-
-}
-
-.cameraIcon {
-
-    border-radius: 100%;
+    gap: 100px;
+    margin-top: -25px;
+    z-index: 1000;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    /* background-color: white; */
-    /* padding: 10px; */
-}
-
-
-.cameraIconImage {
+    bottom: 0;
+    left: 0;
     width: 100%;
-    width: 37px;
-    height: 37px;
 }
-
-
-.profilePhotoAndCameraIcon {
-    position: relative;
-}
-
-.profilePhoto {}
-
-.profilePhotoImage {
-    width: 145px;
-    height: 145px;
-    object-fit: cover;
-    border-radius: 100%;
-    border: 4px solid white;
-    margin-top: -105px;
-    margin-left: 17px;
-}
-
-.hasStory {
-    border: 10px solid white;
-    /* Inner white border (2px) */
-    outline: 3px solid #0861F2;
-    /* Middle green border (2px) */
-    outline-offset: -7px;
-    /* Adjust offset to align with the border */
-}
-
-.cameraIconForProfile {
-
-    border-radius: 100%;
-    position: absolute;
-    top: -2px;
-    left: 115px;
-    /* background: white; */
-
-
-}
-
-
-.cameraIconImageForProfile {
-    width: 100%;
-    width: 37px;
-    height: 37px;
-    border: 2px solid white;
-    border-radius: 100%;
-    box-shadow: inset 0 0 0 4px rgb(255, 255, 255);
-    /* Creates a 4px white inner border */
-}
-
-
-.name {
-    font-size: 14px;
-}
-
-
-.bioSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 7px;
-    align-items: start;
-    margin-top: 3px;
-    font-weight: bolder;
-    margin-left: 17px;
-}
-
-
-
-#friendsText {
-    color: #65676B;
-    font-weight: normal;
-}
-
-#friendsNumber {
-    text-transform: capitalize;
-}
-
-.bio {
-    font-weight: normal;
-}
-
-
-
-.buttons {
-    display: flex;
-    flex-direction: row;
-    margin: 17px;
-    /* gap: 6px; */
-    justify-content: space-between;
-    gap: 5px;
-}
-
-
 
 .addStory {
     display: flex;
     align-items: center;
-    background-color: #1B74E4;
+    background-color: rgba(27, 116, 228, 1.0);
+    border-radius: 6px;
     /* Facebook's green color */
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 0px 22px;
+    padding: 0px 30px;
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
@@ -215,32 +54,15 @@ body {
     justify-content: space-between;
 }
 
-
-.plusSign {
-    align-self: center;
-    /* font-size: 20px; */
-    /* Size of the plus sign */
-    margin-right: 5px;
-    /* Space between plus sign and text */
-    width: 15px;
-    /* height: 10px; */
-}
-
-.plusSign img {
-    width: 90%;
-    margin-top: 2px;
-
-}
-
 .editProfile {
     display: flex;
     align-items: center;
-    background-color: #E4E6EB;
+    background-color: rgba(228, 230, 235, 1.0);
     /* Facebook's green color */
     color: black;
     border: none;
-    border-radius: 8px;
-    padding: 0px 22px;
+    border-radius: 6px;
+    padding: 0px 30px;
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
@@ -251,243 +73,21 @@ body {
 
 
 
-.pencilSign {
-    width: 15px;
-    align-self: center;
-}
-
-.pencilSign img {
-    width: 100%;
-    margin-top: 2px;
-}
-
-
-
-
-
-
-
 .treeDot {
     display: flex;
     justify-content: start;
     align-items: start;
-    background-color: #E4E6EB;
+    background-color: rgba(228, 230, 235, 1.0);
     /* Facebook's green color */
     border: none;
-    border-radius: 8px;
-    padding: 10px 15px;
+    border-radius: 6px;
+    padding: 10px 20px;
     cursor: pointer;
     text-align: center;
 }
 
 
 
-#dots {
-    color: black;
-    margin-top: -10px;
-    font-weight: 900;
-    font-size: 20px;
-    letter-spacing: -2px;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Tabs container */
-.tabs-container {
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 1px solid #ddd;
-    background-color: white;
-}
-
-/* Each tab */
-.tab {
-    padding: 15px;
-    cursor: pointer;
-    flex-grow: 1;
-    text-align: center;
-    color: #65676B;
-    font-weight: bold;
-    border-bottom: 3px solid transparent;
-}
-
-/* Active tab styles */
-.tab.active {
-    color: #1877F2;
-    /* Facebook blue */
-    border-bottom: 2px solid #1877F2;
-}
-
-/* Tab content */
-.tab-content {
-    display: none;
-    padding: 15px;
-    background-color: white;
-}
-
-/* Show active tab content */
-.tab-content.active {
-    display: block;
-}
-
-
-
-.styled-line {
-    border: 0;
-    /* Remove the default border */
-    height: 4px;
-    /* Set the thickness of the line */
-    background-color: #B0B3B8;
-    /* Set the line color */
-    /* Add some space above and below the line */
-    width: 100%;
-    /* Set the width of the line */
-}
-
-
-
-.lockedAccount {
-    display: flex;
-    margin: 19px;
-    gap: 15px;
-}
-
-#lockBolderText {
-    font-weight: bold;
-}
-
-#lockLinkText {
-    color: #1877F2;
-}
-
-
-.hidden {
-    display: none;
-}
-
-
-.workList {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 10px;
-}
-
-
-.workList img {
-    width: 20px;
-    align-self: baseline;
-}
-
-
-.intro {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#afterIntro {
-    margin-top: 16px;
-    background-color: #ddd;
-    /* Change the color */
-    height: 1px;
-    /* Adjust the height */
-    border: none;
-    /* Remove default border */
-}
-
-.friends {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.friendsText {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.seeAllText {
-    color: #1877F2;
-}
-
-
-.posts {
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-
-}
-
-.statusUpdateSection {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px 0;
-    gap: 14px;
-    /* background-color: red; */
-    align-items: center;
-}
-
-.statusUpdateSection img {
-    width: 33px;
-    height: 33px;
-    border-radius: 100%;
-    object-fit: cover;
-}
-
-.imgIcon img {
-    object-fit: contain;
-    border-radius: 0px;
-    width: 95%;
-}
-
-.imgIcon {
-    display: flex;
-    justify-content: end;
-    width: 30px;
-    height: 30px;
-    /* background-color: red; */
-}
-
-
-
-
-.postText {
-    font-weight: bold;
-    font-size: 17px;
-}
-
-.statusUpdate {
-    width: 75%;
-    background-color: #F0F2F5;
-    border-radius: 20px;
-    padding: 8px 10px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    align-self: center;
-}
-
-.statusUpdate span {
-    padding-left: 10px;
-}
 
 .otherStatus {
     width: 90%;
@@ -561,22 +161,12 @@ body {
 
 
 
-.mobileFooter {
-    background-color: black;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 90px;
-    /* margin-top: -19px;
-    z-index: 1000;
-    position: relative; */
-}
+
+
 
 .mobileFooter img {
     width: 15px;
     height: 15px;
-    /* background-color: red; */
 }
 
 #homeNav {
@@ -587,6 +177,474 @@ body {
 #menuNav {
     width: 15.5px;
     height: 15.5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #C9CCD1;
+
+}
+
+.nameAndArrow {
+    display: flex;
+    gap: 14px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.nameTop {
+    /* font-size: 14px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    /* gap: 4px; */
+    font-size: 15px;
+}
+
+.arrow img {
+    margin-top: 3px;
+    width: 20px;
+    align-self: center;
+    /* background-color: red; */
+}
+
+.profileAndSearch {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.search img {
+    margin-top: 3px;
+    width: 20px;
+    align-self: center;
+}
+
+.profile {
+    font-weight: normal;
+    font-size: 15px;
+    color: #1877f2;
+}
+
+
+
+
+
+.profileAndCoverSection {}
+
+.coverPhotoAndCameraIcon {
+    position: relative;
+
+}
+
+/* .coverPhoto{
+    height: 400px;
+} */
+
+.coverPhotoImage {
+    width: 100%;
+    object-fit: cover;
+    height: 160px;
+
+}
+
+.cameraIcon {
+
+    border-radius: 100%;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    /* background-color: white; */
+    /* padding: 10px; */
+}
+
+
+.cameraIconImage {
+    width: 100%;
+    width: 37px;
+    height: 37px;
+}
+
+
+.profilePhotoAndCameraIcon {
+    position: relative;
+}
+
+.profilePhoto {}
+
+.profilePhotoImage {
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 4px solid white;
+    margin-top: -105px;
+    margin-left: 17px;
+}
+
+.hasStory {
+    border: 10px solid white;
+    /* Inner white border (2px) */
+    outline: 3px solid #0866ff;
+    /* Middle green border (2px) */
+    outline-offset: -7px;
+    /* Adjust offset to align with the border */
+}
+
+.cameraIconForProfile {
+
+    border-radius: 100%;
+    position: absolute;
+    top: -2px;
+    left: 115px;
+    /* background: white; */
+
+
+}
+
+
+.cameraIconImageForProfile {
+    width: 100%;
+    width: 37px;
+    height: 37px;
+    border: 2px solid white;
+    border-radius: 100%;
+    box-shadow: inset 0 0 0 4px rgb(255, 255, 255);
+    /* Creates a 4px white inner border */
+}
+
+
+
+
+
+
+
+#mainName {
+    font-size: 22px;
+    font-weight: 700;
+    /* background-color: red; */
+}
+
+
+
+.bioSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7px;
+    align-items: start;
+    margin-top: 3px;
+    font-weight: bolder;
+    margin-left: 17px;
+    /* background-color: red; */
+    margin-right: 17px;
+}
+
+
+
+#friendsText {
+    color: #65676B;
+    font-weight: normal;
+}
+
+#friendsNumber {
+    text-transform: capitalize;
+}
+
+.bio {
+    font-weight: normal;
+}
+
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 17px;
+    /* gap: 6px; */
+    justify-content: space-between;
+    gap: 2px;
+    /* background-color:red ; */
+}
+
+
+
+
+.plusSign {
+    align-self: center;
+    /* font-size: 20px; */
+    /* Size of the plus sign */
+    margin-right: 5px;
+    /* Space between plus sign and text */
+    width: 15px;
+    /* height: 10px; */
+}
+
+.plusSign img {
+    width: 90%;
+    margin-top: 2px;
+
+}
+
+
+
+.pencilSign {
+    width: 15px;
+    align-self: center;
+}
+
+.pencilSign img {
+    width: 100%;
+    margin-top: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+#dots {
+    color: black;
+    margin-top: -10px;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -2px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabs container */
+.tabs-container {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+/* Each tab */
+.tab {
+    padding: 15px;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    color: #65676B;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    font-weight: normal;
+
+}
+
+/* Active tab styles */
+.tab.active {
+    color: #1763cf;
+    /* Facebook blue */
+    border-bottom: 1.5px solid rgba(27, 116, 228, 1.0);
+    font-weight: normal;
+
+}
+
+/* Tab content */
+.tab-content {
+    display: none;
+    padding: 15px;
+    background-color: white;
+}
+
+/* Show active tab content */
+.tab-content.active {
+    display: block;
+}
+
+
+
+.styled-line {
+    border: 0;
+    /* Remove the default border */
+    height: 4px;
+    /* Set the thickness of the line */
+    background-color: rgba(226, 229, 233, 1.0);
+    /* Set the line color */
+    /* Add some space above and below the line */
+    width: 100%;
+    /* Set the width of the line */
+}
+
+
+
+.lockedAccount {
+    display: flex;
+    margin: 19px;
+    gap: 15px;
+}
+
+#lockBolderText {
+    font-weight: bold;
+}
+
+#lockLinkText {
+    color: #1763cf;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.workList {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.workList img {
+    width: 20px;
+    align-self: baseline;
+}
+
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#afterIntro {
+    margin-top: 16px;
+    background-color: #ddd;
+    /* Change the color */
+    height: 1px;
+    /* Adjust the height */
+    border: none;
+    /* Remove default border */
+}
+
+.friends {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.friendsText {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.seeAllText {
+    color: #1763cf;
+}
+
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+}
+
+.statusUpdateSection {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    gap: 8px;
+    /* background-color: red; */
+    align-items: center;
+}
+
+
+
+.statusUpdate {
+    width: 100%;
+    background-color: rgba(240, 242, 245, 1.0);
+    border-radius: 20px;
+    padding: 7px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    align-self: center;
+}
+
+.statusUpdateSection img {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.imgIcon img {
+    object-fit: contain;
+    border-radius: 0px;
+    width: 100%;
+    /* background-color: red; */
+}
+
+.imgIcon {
+    display: flex;
+    justify-content: end;
+    width: 30px;
+    height: 30px;
+    /* background-color: red; */
+}
+
+
+
+
+.postText {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+
+
+.statusUpdate span {
+    padding-left: 10px;
+    color: #3e4042;
 }
 
 /* 
@@ -615,8 +673,9 @@ body {
 }
 
 .right img {
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
+    /* background-color: red; */
 
 }
 
@@ -624,4 +683,5 @@ body {
 #timeDisplay {
     font-family: 'Poppins';
     font-weight: 500;
+    font-size: 12px;
 }
