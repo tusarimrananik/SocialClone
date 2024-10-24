@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const filePath = "https://fbclone-2.onrender.com/facebook_ui/";
+const filePath = "https://tusarimrananik.github.io/FacebookUI/";
 
 async function setProfileInfo(profileData) {
     const browser = await puppeteer.launch({
