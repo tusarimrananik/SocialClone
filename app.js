@@ -29,8 +29,6 @@ app.get('/', (req, res) => {
 });
 
 
-
-
 async function fetchAndSetProfileInfo(url) {
     try {
         // Fetch profile information from the provided URL

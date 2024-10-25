@@ -5,35 +5,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #181a1b;
+            /* Dark background for a GitHub dark theme style */
+            color: #e1e4e8;
+            /* Light text color for contrast */
+        }
+
+        .rootBody {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            gap: 20px;
+            width: 60%;
+            /* background-color: red; */
+            margin: auto;
+
+            background-color: #24292f;
+            border: 2px solid #444c56;
+            border-radius: 8px;
+            /* padding: 20px; */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin: auto;
+            /* color: #e1e4e8; */
+
+
+
+        }
+
+
+        #urlForm {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+
+
+        #urlForm input {
+            background-color: #24292f;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 15px;
+            padding: 10px;
+            border: 1px solid #444c56;
+            border-radius: 6px;
+            min-width: 70%;
+            flex-grow: 1;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #urlForm button {
+            min-width: 20%;
+            flex-grow: 1;
+            background-color: #24292f;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 15px;
+            padding: 10px 30px;
+            border: 1px solid #444c56;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            word-wrap: break-word;
+        }
+
+
+
+
+
+
+        #urlForm button:hover {
+            background-color: #31363c;
+            border-color: #768390;
+        }
+
+        #urlForm button:active {
+            background-color: #2d3339;
+            border-color: #57606a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+        #urlForm input:focus {
+            background-color: #31363c;
+            border-color: #768390;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(113, 134, 150, 0.5);
+        }
+
+        #result {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         #result img {
-            max-width: 400px;
-            display: block;
-            margin: 10px 0;
+            /* width: 20%; */
+            max-height: 400px;
+            border: 2px solid #444c56;
+            border-radius: 6px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #result a {
+            width: 100%;
+        }
+
+        #result button {
+            width: 100%;
+            background-color: #24292f;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 15px;
+            padding: 8px 20px;
+            border: 1px solid #444c56;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        #result button:hover {
+            background-color: #31363c;
+            border-color: #768390;
+        }
+
+        #result button:active {
+            background-color: #2d3339;
+            border-color: #57606a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error {
+            background-color: #f44336;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 14px;
+            padding: 10px 15px;
+            border: 1px solid #d32f2f;
+            border-radius: 6px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            /* Light border */
+            border-top: 4px solid #9147ff;
+            /* Color of the spinner */
+            border-radius: 50%;
+            /* Circular shape */
+            width: 30px;
+            /* Width of the spinner */
+            height: 30px;
+            /* Height of the spinner */
+            animation: spin 1s linear infinite;
+            /* Spinning animation */
+            margin: 10px auto;
+            /* Center the spinner */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @media (max-width: 768px) {
+
+            .rootBody{
+                width: 100%;
+            }
+
+
         }
     </style>
+
+
+
 </head>
 
 <body>
-    <h1>Generate Image from URL</h1>
-    <form id="urlForm">
-        <input type="text" id="url" placeholder="Enter URL" required>
-        <button type="submit">Submit</button>
-    </form>
 
-    <div id="result"></div>
+
+    <div class="rootBody">
+
+        <form id="urlForm">
+            <input type="text" id="url" placeholder="Facebook profile link" required>
+            <button type="submit">Submit</button>
+        </form>
+
+
+        <div id="result">
+            <img src="https://images.unsplash.com/photo-1509768368676-f3c3b060679d?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+            <a href=""><button>Download Image</button></a>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
 
     <script>
-
-
-
         function isValidFacebookProfileUrl(url) {
             const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)?(facebook\.com|fb\.com)\/.+$/;
             return regex.test(url.trim());
         }
-
-
         // Handle form submission via AJAX
+
+
+
         document.getElementById('urlForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevent form from submitting the traditional way
             const urlInput = document.getElementById('url').value;
@@ -41,9 +270,18 @@
             // Validate the URL input
             if (!isValidFacebookProfileUrl(urlInput)) {
                 console.error('Invalid Facebook profile URL');
-                document.getElementById('result').innerHTML = 'Please enter a valid Facebook profile URL.';
+                document.getElementById('result').classList.add('error');
+                document.getElementById('result').innerHTML = 'Please enter a valid Facebook profile URL!';
                 return; // Stop further execution if the URL is invalid
             }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            // Show loading spinner
+            const loadingSpinner = document.createElement('div');
+            loadingSpinner.className = 'loading-spinner';
+            resultDiv.appendChild(loadingSpinner);
 
             try {
                 // Send the form data via AJAX using fetch
@@ -66,22 +304,20 @@
                 const img = document.createElement('img');
                 img.src = result.imgSrc; // Use the Base64 image source
                 img.alt = 'Generated Image';
-                img.style.maxWidth = '400px';
 
                 // Create a download link
                 const downloadLink = document.createElement('a');
                 downloadLink.href = result.imgSrc; // Use the Base64 string for downloading
-                downloadLink.download = 'downloaded_image.png'; // Update to .png for image format
+                downloadLink.download = 'profile.png'; // Update to .png for image format
                 downloadLink.innerHTML = '<button>Download Image</button>';
 
-                // Display the image and download link in the result div
-                const resultDiv = document.getElementById('result');
+                // Clear loading spinner and display the image and download link
                 resultDiv.innerHTML = '';
                 resultDiv.appendChild(img);
                 resultDiv.appendChild(downloadLink);
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('result').innerHTML = 'Error submitting the form!';
+                resultDiv.innerHTML = 'Error submitting the form!';
             }
         });
 
@@ -95,13 +331,7 @@
                 console.error("Failed to read clipboard contents:", err);
             }
         }
-
-
         document.getElementById("url").addEventListener('focus', pasteFromClipboard);
-
-
-
-
     </script>
 </body>
 
