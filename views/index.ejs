@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Generator</title>
+    <title>Facebook Hacker</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -37,11 +37,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin: auto;
             /* color: #e1e4e8; */
-
-
-
         }
-
 
         #urlForm {
             display: flex;
@@ -50,8 +46,6 @@
             gap: 15px;
             flex-wrap: wrap;
         }
-
-
 
         #urlForm input {
             background-color: #24292f;
@@ -83,11 +77,6 @@
             word-wrap: break-word;
         }
 
-
-
-
-
-
         #urlForm button:hover {
             background-color: #31363c;
             border-color: #768390;
@@ -98,9 +87,6 @@
             border-color: #57606a;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-
-
 
         #urlForm input:focus {
             background-color: #31363c;
@@ -195,27 +181,9 @@
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         @media (max-width: 768px) {
 
-            .rootBody{
+            .rootBody {
                 width: 100%;
             }
 
@@ -234,25 +202,18 @@
 
         <form id="urlForm">
             <input type="text" id="url" placeholder="Facebook profile link" required>
-            <button type="submit">Submit</button>
+            <button type="submit">Hack</button>
         </form>
 
 
         <div id="result">
-            <img src="https://images.unsplash.com/photo-1509768368676-f3c3b060679d?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            <!-- <img src="https://images.unsplash.com/photo-1509768368676-f3c3b060679d?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="">
-            <a href=""><button>Download Image</button></a>
+            <a href=""><button>Download Image</button></a> -->
         </div>
 
 
     </div>
-
-
-
-
-
-
-
 
     <script>
         function isValidFacebookProfileUrl(url) {
@@ -298,7 +259,6 @@
                 }
 
                 const result = await response.json();
-                console.log(result);
 
                 // Create the image element
                 const img = document.createElement('img');
@@ -324,7 +284,6 @@
         async function pasteFromClipboard() {
             try {
                 const text = await navigator.clipboard.readText();
-                console.log("Pasted text:", text);
                 // Use the pasted text, for example, display it in an input field
                 document.getElementById("url").value = text;
             } catch (err) {
