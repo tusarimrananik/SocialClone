@@ -27,11 +27,6 @@
 
 
 
-
-
-
-
-
         function isValidFacebookProfileUrl(url) {
             const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)?(facebook\.com|fb\.com)\/.+$/;
             return regex.test(url.trim());
@@ -90,6 +85,19 @@
             }
         });
 
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                console.log("Pasted text:", text);
+                // Use the pasted text, for example, display it in an input field
+                document.getElementById("url").value = text;
+            } catch (err) {
+                console.error("Failed to read clipboard contents:", err);
+            }
+        }
+
+
+        document.getElementById("url").addEventListener('focus', pasteFromClipboard);
 
 
 

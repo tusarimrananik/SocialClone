@@ -13,6 +13,7 @@ async function getProfileInfo(url) {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
+    console.log("New connection!")
 
 
 
