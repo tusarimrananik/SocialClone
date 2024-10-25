@@ -44,18 +44,30 @@ async function fetchAndSetProfileInfo(url) {
     }
 }
 
+let isProcessing = false;
+
 app.post('/submit', async (req, res) => {
+    // Check if a request is already being processed
+    if (isProcessing) {
+        return res.status(429).json({ error: 'Server is busy. Please try again later.' });
+    }
+
     const submittedUrl = req.body.url;
 
     if (!submittedUrl) {
         return res.status(400).json({ error: 'URL is required' });
     }
+
+    isProcessing = true; // Set processing lock
+
     try {
         const imageBuffer = await fetchAndSetProfileInfo(submittedUrl);
-        const imgSrc = `data:image/png;base64,${Buffer.from(imageBuffer).toString('base64')}`; // Directly convert buffer to base64
+        const imgSrc = `data:image/png;base64,${Buffer.from(imageBuffer).toString('base64')}`;
         res.json({ imgSrc });
     } catch (error) {
         console.error('Error taking screenshot:', error);
         res.status(500).json({ error: 'Failed to take screenshot' });
+    } finally {
+        isProcessing = false; // Release processing lock
     }
 });

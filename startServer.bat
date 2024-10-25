@@ -1,3 +1,3 @@
 @echo off
-start /min cmd /k "cd /d %USERPROFILE%\Desktop\FBClone && npm start"
-start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"
+start "FBClone Server" /min cmd /C "cd /d %USERPROFILE%\Desktop\FBClone && npm start"
+start "Ngrok Server" /min cmd /C "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"

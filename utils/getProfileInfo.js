@@ -9,6 +9,7 @@ async function getProfileInfo(url) {
     let infos = {};
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
+        headless: true,
         executablePath,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -159,7 +160,7 @@ async function getProfileInfo(url) {
     } catch (error) {
         console.log("Error occurred while gathering data: ", error);
     }
-
+    await browser.close(); // Close the browser after operations
     // Return the gathered information
     return infos;
 

@@ -5,6 +5,7 @@ var locateChrome = require('locate-chrome');
 async function setProfileInfo(profileData) {
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
+        headless: true,
         executablePath,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
