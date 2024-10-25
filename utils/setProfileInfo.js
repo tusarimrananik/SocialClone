@@ -1,19 +1,13 @@
 const puppeteer = require('puppeteer');
 const filePath = "https://tusarimrananik.github.io/FacebookUI/";
+var locateChrome = require('locate-chrome');
 
 async function setProfileInfo(profileData) {
-    const browser = await puppeteer.launch({
-        // headless: true,
-        // args: [
-        //     '--no-sandbox',
-        //     '--disable-setuid-sandbox',
-        //     '--single-process',
-        //     '--no-zygote'
-        // ],
-        // executablePath: process.env.NODE_ENV === "production"
-        //     ? process.env.PUPPETEER_EXECUTABLE_PATH
-        //     : puppeteer.executablePath(),
+    const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
 
+    const browser = await puppeteer.launch({
+        executablePath,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
 

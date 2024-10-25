@@ -1,21 +1,16 @@
 // Define the getProfileInfo function
 const puppeteer = require('puppeteer');
 require('dotenv').config();
+var locateChrome = require('locate-chrome');
+
+
 
 async function getProfileInfo(url) {
     let infos = {};
-
+    const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
-        // headless: true,
-        // args: [
-        //     '--no-sandbox',
-        //     '--disable-setuid-sandbox',
-        //     '--single-process',
-        //     '--no-zygote'
-        // ],
-        // executablePath: process.env.NODE_ENV === "production"
-        //     ? process.env.PUPPETEER_EXECUTABLE_PATH
-        //     : puppeteer.executablePath(),
+        executablePath,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
 
