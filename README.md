@@ -8,9 +8,9 @@ Batch Script for Running the Server:
 
 To start the EduClone server and create a secure tunnel, use the following `.bat` file script:
 
-@echo off
+`@echo off
 start /min cmd /k "cd /d %USERPROFILE%\Desktop\FBClone && npm start"
-start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"
+start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"`
 
 ------------------------------------------------------------------------------------------------------
 Dockerfile for EduClone:
