@@ -4,7 +4,6 @@ const { getProfileInfo } = require('./utils/getProfileInfo');
 const { setProfileInfo } = require('./utils/setProfileInfo');
 
 const express = require('express');
-require('dotenv').config(); // Load environment variables
 
 // Set up Express app
 const app = express();

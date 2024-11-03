@@ -161,36 +161,6 @@ async function setData(profileData, page) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function takeScreenshot(page) {
     try {
         // new Promise(resolve => setTimeout(resolve, 2000));

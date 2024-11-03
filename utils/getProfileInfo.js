@@ -2,22 +2,18 @@
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 var locateChrome = require('locate-chrome');
-
-
+const userId = process.env.USER_ID;
+const facebookCookie = process.env.FACEBOOK_COOKIE;
 
 async function getProfileInfo(url) {
     let infos = {};
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         executablePath,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
-
     console.log("New connection!")
-
-
-
     const [page] = await browser.pages();
     const dimensions = await page.evaluate(() => {
         return {
@@ -25,40 +21,58 @@ async function getProfileInfo(url) {
             height: window.screen.height
         };
     });
-
-
     await page.setViewport({
         width: dimensions.width,
         height: dimensions.height,
     });
 
-
-    const cookies = [
-        {
-            name: 'c_user',
-            value: '100006234702363',
-            domain: '.facebook.com',
-            path: '/',
-            httpOnly: true,
-            secure: true,
-        },
-        {
-            name: 'xs',
-            value: '8%3AYrJGWzpRGYhvug%3A2%3A1729688679%3A-1%3A9584%3A%3AAcX2jdae_xCqIUUA1O22f9QR1d-fe7JKHiheBezulg',
-            domain: '.facebook.com',
-            path: '/',
-            httpOnly: true,
-            secure: true,
-        },
-    ];
     try {
+        // Check if the USER_ID and FACEBOOK_COOKIE environment variables are set
+        if (!userId || !facebookCookie) {
+            throw new Error('USER_ID or FACEBOOK_COOKIE is not defined in the .env file');
+        }
+        const cookies = [
+            {
+                name: 'c_user',
+                value: userId,
+                domain: '.facebook.com',
+                path: '/',
+                httpOnly: true,
+                secure: true,
+            },
+            {
+                name: 'xs',
+                value: facebookCookie,
+                domain: '.facebook.com',
+                path: '/',
+                httpOnly: true,
+                secure: true,
+            },
+        ];
+
+        // Attempt to set the cookies
         await page.setCookie(...cookies);
+        console.log('Cookies set successfully');
+
     } catch (error) {
-        console.error("Error occurred while setting cookies: ", error);
+        console.error("Error occurred while setting cookies:", error.message);
     }
 
+    if (!url.startsWith('https://')) {
+        // Replace any other protocol (like http://, ftp://, etc.) with https://
+        url = url.replace(/^[a-zA-Z]+:\/\//, 'https://');
 
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
+        // Add 'https://' if the URL doesn't have any protocol at all
+        if (!url.startsWith('https://')) {
+            url = `https://${url}`;
+        }
+    }
+
+    try {
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
+    } catch (error) {
+        console.error('Error occurred while navigating to the URL:', error.message);
+    }
 
 
 

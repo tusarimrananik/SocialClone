@@ -175,26 +175,6 @@
             const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)?(facebook\.com|fb\.com)\/.+$/;
             return regex.test(url.trim());
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Handle form submission via AJAX
         document.getElementById('urlForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevent form from submitting the traditional way
@@ -265,21 +245,6 @@
                 loadingSpinner.remove(); // Ensure loading spinner is removed once finished
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // Paste text from clipboard into the input field
         async function pasteFromClipboard() {
