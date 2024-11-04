@@ -2,8 +2,10 @@
 const path = require('path');
 const { getProfileInfo } = require('./utils/getProfileInfo');
 const { setProfileInfo } = require('./utils/setProfileInfo');
+const { exec } = require('child_process');
 
 const express = require('express');
+const { info } = require('console');
 
 // Set up Express app
 const app = express();
@@ -70,3 +72,26 @@ app.post('/submit', async (req, res) => {
         isProcessing = false; // Release processing lock
     }
 });
+
+
+
+
+
+// app.post('/run', async (req, res) => {
+    // const submittedCode = req.body.code;
+    // if (submittedCode === "sleep") {
+    //     exec('rundll32.exe powrprof.dll,SetSuspendState 0,1,0', (error, stdout, stderr) => {
+    //         if (error) {
+    //             console.error(`Error: ${error.message}`);
+    //             return;
+    //         }
+    //         if (stderr) {
+    //             console.error(`stderr: ${stderr}`);
+    //             return;
+    //         }
+    //         console.log('PC is going to sleep...');
+    //     });
+    // } else {
+    //     console.log('error')
+    // }
+// });

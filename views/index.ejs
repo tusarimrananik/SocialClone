@@ -169,6 +169,9 @@
         <div id="result" aria-live="polite"></div>
     </div>
 
+
+    <!-- <button id="runCode">RUN CODE</button> -->
+
     <script>
         // Validates if the provided URL is a Facebook profile URL
         function isValidFacebookProfileUrl(url) {
@@ -257,7 +260,31 @@
         }
 
         document.getElementById("url").addEventListener('focus', pasteFromClipboard);
+
+
+
+
+        // document.getElementById('runCode').addEventListener('click', async () => {
+        //     const runCMD = await fetch('/run', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({ code: "sleep" })
+        //     });
+        // })
+
+
+
+
+
+
     </script>
+
+
+
+
+
 </body>
 
 </html>
