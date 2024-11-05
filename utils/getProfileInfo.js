@@ -9,7 +9,7 @@ async function getProfileInfo(url) {
     let infos = {};
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         executablePath,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -68,7 +68,7 @@ async function getProfileInfo(url) {
     }
 
     try {
-        await page.goto(url, { waitUntil: 'domcontentloaded' });
+        await page.goto(url, { waitUntil: 'networkidle0' });
     } catch (error) {
         console.error('Error occurred while navigating to the URL:', error.message);
     }
@@ -100,11 +100,11 @@ async function getProfileInfo(url) {
 
         // Wait for all selectors with a single timeout management
         await Promise.all([
-            page.waitForSelector(selectors.nameHeader, { timeout: 5000 }).catch(() => null),
-            page.waitForSelector(selectors.profilePicture, { timeout: 5000 }).catch(() => null),
-            page.waitForSelector(selectors.coverPhoto, { timeout: 5000 }).catch(() => null),
-            page.waitForSelector(selectors.bio, { timeout: 5000 }).catch(() => null),
-            page.waitForSelector(selectors.friendsCount, { timeout: 5000 }).catch(() => null),
+            page.waitForSelector(selectors.nameHeader, { timeout: 15000 }).catch(() => null),
+            page.waitForSelector(selectors.profilePicture, { timeout: 15000 }).catch(() => null),
+            page.waitForSelector(selectors.coverPhoto, { timeout: 15000 }).catch(() => null),
+            page.waitForSelector(selectors.bio, { timeout: 15000 }).catch(() => null),
+            page.waitForSelector(selectors.friendsCount, { timeout: 15000 }).catch(() => null),
             page.waitForSelector(selectors.isLockedBadge, { timeout: 1000 }).catch(() => null),
             page.waitForSelector(selectors.hasStory, { timeout: 1000 }).catch(() => null)
         ]);
