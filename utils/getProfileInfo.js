@@ -9,7 +9,7 @@ async function getProfileInfo(url) {
     let infos = {};
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         executablePath,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
