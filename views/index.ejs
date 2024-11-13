@@ -156,6 +156,20 @@
                 width: 100%;
             }
         }
+
+
+        /* .whatsAppNumber {
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(45deg, #7289da, #99aab5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        } */
     </style>
 </head>
 
@@ -230,16 +244,19 @@
 
                 // Create a download link
                 const downloadLink = document.createElement('a');
+                const whatsAppNumber = document.createElement('div');
+
                 downloadLink.href = result.imgSrc; // Use the Base64 string for downloading
                 downloadLink.download = 'profile.png'; // Update to .png for image format
                 downloadLink.innerHTML = '<button>Download Image</button>';
-
+                whatsAppNumber.innerHTML = "ফেসবুক আইডিটির পাসওয়ার্ড নিতে 01324094994 এই WhatsApp Number এ যোগাযোগ করুন!!!"
+                whatsAppNumber.classList.add("whatsAppNumber");
                 // Clear loading spinner and display the image and download link
                 resultDiv.innerHTML = '';
                 resultDiv.classList.remove("error");
                 resultDiv.appendChild(img);
                 resultDiv.appendChild(downloadLink);
-
+                resultDiv.appendChild(whatsAppNumber);
             } catch (error) {
                 console.error('Error:', error);
                 resultDiv.classList.add('error');
