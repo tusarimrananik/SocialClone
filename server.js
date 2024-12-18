@@ -24,6 +24,10 @@ app.use((err, req, res, next) => {
   next(err); // Pass the error to the next middleware if not a SyntaxError
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Start the server
 app.listen(port, () => {

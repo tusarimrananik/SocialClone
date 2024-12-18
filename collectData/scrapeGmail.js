@@ -36,12 +36,13 @@ const scrapeGmail = async (gmail) => {
 
             // Create a blank image buffer with the background color
             const svgImage = `
-                <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+              <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100%" height="100%" fill="#EC407A"/>
-                    <text x="50%" y="50%" font-size="200px" font-family="Arial" font-weight="bold" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">
+                    <text x="50%" y="70%" font-size="275px" font-family="Google Sans" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">
                         ${alphabet}
                     </text>
                 </svg>
+
             `;
 
             // Use sharp to convert the SVG to PNG

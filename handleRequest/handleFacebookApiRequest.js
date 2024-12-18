@@ -16,7 +16,7 @@ async function handleFacebookApiRequest(req, res) {
             });
         }
 
-        const facebookProfileUrl = Object.values(req.body)[0];
+        const facebookProfileUrl = Object.values(req.body)[0].toLowerCase();;
         const validation = validateFacebookUrlRequest({ url: facebookProfileUrl });
         if (validation.error) {
             return res.status(400).json({

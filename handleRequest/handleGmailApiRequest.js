@@ -11,7 +11,7 @@ async function handleGmailApiRequest(req, res) {
                 error: ['Server is currently busy, please try again later.']
             });
         }
-        const gmail = Object.values(req.body)[0];
+        const gmail = Object.values(req.body)[0].toLowerCase();;
         const validation = validateGmailRequest({ gmail: gmail });
 
         if (validation.error) {
@@ -23,8 +23,14 @@ async function handleGmailApiRequest(req, res) {
             //perform task
             const gatheredGmailProfilePicture = await scrapeGmail(validation.value.gmail);
             const baseImageBuffer = fs.readFileSync("./assets/base-image.png");
-            const screenshotBuffer = await prepareGmailData(baseImageBuffer, gatheredGmailProfilePicture, validation.value.url);
+
+
+
+            const screenshotBuffer = await prepareGmailData(baseImageBuffer, gatheredGmailProfilePicture, validation.value.gmail);
+
             const imgSrc = `data:image/png;base64,${Buffer.from(screenshotBuffer).toString('base64')}`;
+
+
             setServerState(false);
             res.json({ imgSrc });
         }
