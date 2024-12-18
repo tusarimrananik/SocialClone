@@ -1,57 +1,47 @@
 const scrapeGmail = require('./../collectData/scrapeGmail.js');
 const prepareGmailData = require('./../prepareData/prepareGmailData.js');
-
-const fs = require('fs')
-const path = require('path');
-
-
-
-
-
+const validateGmailRequest = require('../validators/validateGmailRequest.js');
+const { getServerState, setServerState } = require('../helperFunctions/serverState.js');
+const fs = require('fs');
+const path = require('path');  // Import the path module
 async function handleGmailApiRequest(req, res) {
-    const gmail = req.body.gmail;
-    const gatheredGmailProfileImageBuffer = await scrapeGmail(gmail);
-    const baseImageBuffer = fs.readFileSync(path.join(__dirname, './../assets/base-image.png'));
-    const editedImageBuffer = await prepareGmailData(baseImageBuffer, gatheredGmailProfileImageBuffer, gmail);
-    const imgSrc = `data:image/png;base64,${Buffer.from(editedImageBuffer).toString('base64')}`;
-    res.json({ imgSrc });
+    try {
+        // Check if the server is busy
+        if (getServerState()) {
+            return res.status(503).json({
+                error: 'Server is currently busy, please try again later.'
+            });
+        }
+
+        const gmail = Object.values(req.body)[0];
+        const validation = validateGmailRequest({ gmail: gmail });
+
+        if (validation.error) {
+            return res.status(400).json({
+                error: validation.error.details.map((err) => err.message)
+            });
+        } else {
+            setServerState(true);
+            //perform task
+            const gatheredGmailProfilePicture = await scrapeGmail(validation.value.url);
+
+            const baseImageBuffer = fs.readFileSync(path.join(__dirname, './assets/base-image.png'))
+            const screenshotBuffer = await prepareGmailData(baseImageBuffer, gatheredGmailProfilePicture, validation.value.url);
+
+            const imgSrc = `data:image/png;base64,${Buffer.from(screenshotBuffer).toString('base64')}`;
+            setServerState(false);
+            res.json({ imgSrc });
+        }
+
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error occurred.' });
+        setServerState(false);
+
+    }
+
 
 }
-
-
-
-
-// if (isProcessing) {
-//     return res.status(429).json({ error: 'Server is busy. Please try again later.' });
-// }
-
-// const submittedUrl = req.body.url;
-
-// if (!submittedUrl) {
-//     return res.status(400).json({ error: 'URL is required' });
-// }
-
-// isProcessing = true; // Set processing lock
-
-// try {
-//     const imageBuffer = await fetchAndSetProfileInfo(submittedUrl);
-//     const imgSrc = `data:image/png;base64,${Buffer.from(imageBuffer).toString('base64')}`;
-//     res.json({ imgSrc });
-// } catch (error) {
-//     console.error('Error taking screenshot:', error);
-//     res.status(500).json({ error: 'Failed to take screenshot' });
-// } finally {
-//     isProcessing = false; // Release processing lock
-// }
-
-
-
-
-
-
-
-
-
 
 
 

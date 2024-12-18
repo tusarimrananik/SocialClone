@@ -5,7 +5,7 @@ const Joi = require('joi');
 const facebookUrlSchema = Joi.object({
     url: Joi.string()
         .pattern(
-            /^(https?:\/\/)?(www\.)?(facebook\.com|fb\.com)\/[a-zA-Z0-9(\.\?)?]+/
+            /^(https?:\/\/)?(www\.|m\.|mbasic\.|web\.)?(facebook\.com|fb\.com)\/[a-zA-Z0-9(\.\?)?]+/
         )
         .required()
         .messages({
