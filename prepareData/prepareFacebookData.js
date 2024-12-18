@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const filePath = "https://tusarimrananik.github.io/FacebookUI/";
 var locateChrome = require('locate-chrome');
 
-async function setProfileInfo(profileData) {
+async function prepareFacebookData(profileData) {
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
         headless: true,
@@ -175,5 +175,5 @@ async function takeScreenshot(page) {
 }
 
 // Export the function
-module.exports = { setProfileInfo };
+module.exports = prepareFacebookData;
 

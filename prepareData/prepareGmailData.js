@@ -7,7 +7,7 @@ const sharp = require('sharp');
  * @param {string} email - The email text to be added as an overlay.
  * @returns {Promise<Buffer>} - The buffer of the edited image.
  */
-const generateEditedImage = async (baseImageBuffer, overlayImageBuffer, email) => {
+const prepareGmailData = async (baseImageBuffer, overlayImageBuffer, email) => {
     try {
         // Resize the overlay image buffer to increase its size before using it
         const resizedOverlayImageBuffer = await sharp(overlayImageBuffer)
@@ -74,4 +74,4 @@ const generateEditedImage = async (baseImageBuffer, overlayImageBuffer, email) =
     }
 };
 
-module.exports = generateEditedImage;
+module.exports = prepareGmailData;

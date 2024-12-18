@@ -1,12 +1,13 @@
-// Define the getProfileInfo function
+// Define the scrapeFacebook function
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 var locateChrome = require('locate-chrome');
+
 const userId = process.env.USER_ID;
 const facebookCookie = process.env.FACEBOOK_COOKIE;
 
-async function getProfileInfo(url) {
-    let infos = {};
+async function scrapeFacebook(url) {
+    let gatheredFacebookInformations = {};
     const executablePath = await new Promise(resolve => locateChrome(arg => resolve(arg))) || '';
     const browser = await puppeteer.launch({
         headless: true,
@@ -159,8 +160,8 @@ async function getProfileInfo(url) {
             return { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory };
         }, selectors);
 
-        // Assign the result to the `infos` object
-        infos = {
+        // Assign the result to the `gatheredFacebookInformations` object
+        gatheredFacebookInformations = {
             name: result.name || null,
             profilePicture: result.profilePicture || null,
             backgroundImage: result.backgroundImage || null,
@@ -175,13 +176,13 @@ async function getProfileInfo(url) {
     }
     await browser.close(); // Close the browser after operations
     // Return the gathered information
-    return infos;
+    return gatheredFacebookInformations;
 
 }
 
 
 // Export the function
-module.exports = { getProfileInfo };
+module.exports = scrapeFacebook;
 
 
 

@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 const sharp = require('sharp');
 
-const getGmailProfilePictureBuffer = async (gmail) => {
+const scrapeGmail = async (gmail) => {
     let browser;
     try {
         browser = await puppeteer.launch({
@@ -89,4 +89,4 @@ const getGmailProfilePictureBuffer = async (gmail) => {
     }
 };
 
-module.exports = getGmailProfilePictureBuffer;
+module.exports = scrapeGmail;
