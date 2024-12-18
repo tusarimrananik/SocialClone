@@ -12,7 +12,7 @@ async function handleFacebookApiRequest(req, res) {
         // Check if the server is busy
         if (getServerState()) {
             return res.status(503).json({
-                error: 'Server is currently busy, please try again later.'
+                error: ['Server is currently busy, please try again later.']
             });
         }
 
@@ -34,7 +34,7 @@ async function handleFacebookApiRequest(req, res) {
             // return res.status(200).json({ "status": "worked" });
         }
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error occurred.' });
+        res.status(500).json({ error: ['Internal Server Error occurred.'] });
         setServerState(false);
 
 
