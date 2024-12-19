@@ -58,18 +58,14 @@ const scrapeGmail = async (gmail) => {
                 await page.waitForSelector(imgSelector, { timeout: 5000 });
                 const imageSrc = await page.$eval(imgSelector, img => img.src);
                 const response = await axios.get(imageSrc, { responseType: 'arraybuffer' });
-                console.log("working on try")
 
                 return Buffer.from(response.data, 'binary');
 
             } catch (error1) {
                 try {
                     await page.waitForSelector(alphabetSelector, { timeout: 5000 });
-                    console.log("alphabet selector found!!")
                     const textContent = await page.$eval(alphabetSelector, element => element.textContent);
-                    console.log(textContent);
                     const imageBuffer = await createImageWithAlphabet(textContent);
-                    console.log("worked on catch 1")
 
                     return imageBuffer;
                 } catch (error2) {

@@ -6,12 +6,8 @@ const loadingContainer = document.getElementById('loadingContainer');
 const errorMessage = document.getElementById('errorMessage');
 const errorMessagText = document.getElementById('errorMessagText');
 const resultImage = document.getElementById('resultImage');
-
 const facebookFormButton = document.getElementById('facebookFormButton');
 const gmailFormButton = document.getElementById('gmailFormButton');
-
-
-
 
 function disableFormSubmit(condition) {
     facebookFormButton.disabled = condition;
@@ -19,7 +15,6 @@ function disableFormSubmit(condition) {
     document.getElementById('facebookFormInput').disabled = condition;
     document.getElementById('gmailFormInput').disabled = condition;
 }
-
 
 downloadButton.addEventListener('click', () => {
     const link = document.createElement('a');
@@ -29,15 +24,11 @@ downloadButton.addEventListener('click', () => {
     link.remove();
 });
 
-
-
 facebookForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
     result.style.display = "none";
     errorMessagText.textContent = "";
     errorMessage.style.display = "none";
-
     try {
         loadingContainer.style.display = "block";
         disableFormSubmit(true);
@@ -53,13 +44,10 @@ facebookForm.addEventListener('submit', async (event) => {
         });
         disableFormSubmit(false);
         loadingContainer.style.display = "none";
-
-
         if (response.ok) {
             const imageSource = await response.json();
             resultImage.src = imageSource.imgSrc;
             result.style.display = "flex";
-
         } else {
             errorMessage.style.display = "block";
             const errorMessages = await response.json()
@@ -72,17 +60,11 @@ facebookForm.addEventListener('submit', async (event) => {
     }
 });
 
-
-
-
 gmailForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
     result.style.display = "none";
     errorMessagText.textContent = "";
     errorMessage.style.display = "none";
-
-
     try {
         loadingContainer.style.display = "block";
         disableFormSubmit(true);
@@ -97,25 +79,36 @@ gmailForm.addEventListener('submit', async (event) => {
         });
         disableFormSubmit(false);
         loadingContainer.style.display = "none";
-
-
         if (response.ok) {
             const imageSource = await response.json();
             resultImage.src = imageSource.imgSrc;
             result.style.display = "flex";
-
-
-
-
         } else {
             errorMessage.style.display = "block";
             const errorMessages = await response.json()
             errorMessages.error.forEach(e => {
                 errorMessagText.innerHTML = `${e}`;
             });
-
         }
     } catch (error) {
         console.log('Fetch error:', error);
     }
 });
+
+document.getElementById('facebookFormInput').addEventListener('focus', async () => {
+    const clipboardText = await pasteFromClipboard();
+    document.getElementById('facebookFormInput').value = clipboardText;
+})
+
+async function pasteFromClipboard() {
+    try {
+        if (!navigator.clipboard) {
+            console.error("Clipboard API not supported in this browser.");
+            return;
+        }
+        const text = await navigator.clipboard.readText();
+        return text;
+    } catch (err) {
+        console.error("Failed to read from clipboard:", err);
+    }
+}
