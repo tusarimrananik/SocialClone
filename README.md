@@ -1,48 +1,102 @@
-# Project Title: EduClone - UI Security Awareness Prototype
+# SocialClone
 
-## Overview
-EduClone is a web application designed for educational purposes, focusing on raising awareness about UI mimicry and associated security risks. This project aims to help developers and cybersecurity enthusiasts learn about the potential dangers of account impersonation through similar-looking interfaces. EduClone highlights the importance of online vigilance and ethical cybersecurity practices, providing users with insights on enhancing security measures. **Note**: This project is solely intended as a learning tool to promote responsible cybersecurity knowledge.
+SocialClone is a Node.js application with the following functionalities:
 
----
+1. **Gmail Profile Picture Scraper**
+   - Accepts a Gmail address.
+   - Scrapes the Gmail profile picture.
+   - Composites the profile picture into an image.
+   - Sends the composited image back to the client for download.
 
-## Batch Script for Running the Server
-To start the EduClone server and create a secure tunnel, use the following `.bat` file script:
+2. **Facebook Profile Information Scraper**
+   - Accepts a Facebook profile link.
+   - Uses Puppeteer to scrape profile information such as:
+     - Profile Picture
+     - Bio
+     - Name
+     - Friends
+   - Prepares a data snapshot using the scraped information.
+   - Takes a screenshot of the prepared data and sends it to the client for download.
 
-```batch
+## Installation
+
+Follow the steps below to get started with SocialClone:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tusarimrananik/SocialClone.git
+   ```
+
+2. Navigate to the project folder:
+   ```bash
+   cd SocialClone
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm ci
+   ```
+
+4. Start the server:
+   ```bash
+   npm start
+   ```
+
+5. Access the application at `http://localhost:3000`.
+
+## Quick Start with Batch Files
+
+For ease of use, you can use the provided batch files to start and stop the server.
+
+### Setting Up
+
+1. Copy the following files to your desktop (outside of the `SocialClone` folder):
+   - `startServer.bat`
+   - `stopServer.bat`
+
+2. Ensure that the `SocialClone` folder is located on your desktop.
+
+3. Verify that Node.js is installed on your system.
+
+### Batch File Contents
+
+#### `startServer.bat`
+```bat
 @echo off
-start /min cmd /k "cd /d %USERPROFILE%\Desktop\FBClone && npm start"
-start /min cmd /k "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"
+start "SocialClone Server" /min cmd /C "cd /d %USERPROFILE%\Desktop\SocialClone && npm start"
+start "Ngrok Server" /min cmd /C "ngrok http --url=humane-newt-formally.ngrok-free.app 3000"
 ```
 
----
-
-## Dockerfile for EduClone
-To containerize EduClone for convenient deployment, use the Docker configuration below. Adjust as needed:
-
-```dockerfile
-# Use a lightweight Node.js image
-FROM node:slim
-
-# Skip Puppeteer's Chromium download if not required
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
-# Install Google Chrome and necessary fonts for Puppeteer compatibility
-RUN apt-get update && apt-get install gnupg wget -y && \
-    wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
-    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-    apt-get update && \
-    apt-get install google-chrome-stable -y --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-
-# Set the working directory and install dependencies
-WORKDIR /edu_clone
-COPY package*.json ./
-RUN npm ci
-COPY . .
-
-# Expose the application port
-EXPOSE 3000
-
-# Define the command to run the application
-CMD [ "node", "app.js" ]
+#### `stopServer.bat`
+```bat
+@echo off
+taskkill /IM node.exe /F >nul 2>&1
+taskkill /IM ngrok.exe /F >nul 2>&1
 ```
+
+### Usage
+
+- **Start the Server:** Double-click `startServer.bat` to start the SocialClone server and Ngrok.
+- **Stop the Server:** Double-click `stopServer.bat` to stop the running processes.
+
+## Features
+
+### Gmail Profile Picture Scraper
+- Input a Gmail address.
+- Automatically retrieves and composites the profile picture.
+- Download the composited image via the client.
+
+### Facebook Profile Information Scraper
+- Input a Facebook profile link.
+- Scrapes and processes profile data (picture, bio, name, friends).
+- Generates a screenshot of the data for download.
+
+## Requirements
+- Node.js
+- Ngrok (for public URL tunneling)
+
+## Repository
+- Clone from [GitHub](https://github.com/tusarimrananik/SocialClone.git)
+
+## Contributions
+Contributions, issues, and feature requests are welcome! Feel free to check out the [issues page](https://github.com/tusarimrananik/SocialClone/issues).
