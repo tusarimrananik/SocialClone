@@ -55,7 +55,7 @@ async function setData(profileData, page) {
 
 
         if (about && aboutElement) {
-            aboutElement.innerHTML = about;
+            // aboutElement.innerHTML = about;
             await waitForElementVisibility(aboutElement); // Wait for bio to be visible
             aboutElement.insertAdjacentHTML('afterbegin', about);
         }
@@ -178,18 +178,13 @@ async function setData(profileData, page) {
 async function takeScreenshot(page) {
     try {
         // new Promise(resolve => setTimeout(resolve, 2000));
-
-
         await page.evaluate(() => {
             document.querySelector('.rootBody').style.transform = 'scale(5)'; // Scale 5x increase the resulation as much as you want here
             document.querySelector('.rootBody').style.transformOrigin = 'top left';
           });
-
-
         const element = await page.$('.rootBody');
         const screenshotBuffer = await element.screenshot();
         return screenshotBuffer;
-
     } catch (error) {
         console.error('Error taking screenshot:', error);
         throw error; // Re-throw error for higher-level handling

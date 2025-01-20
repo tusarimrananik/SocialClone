@@ -157,8 +157,16 @@ async function scrapeFacebook(url) {
             const hasStoryElement = document.querySelector(selectors.hasStory);
             const hasStory = !!hasStoryElement; // Boolean check
             //I'll do more checking to filter everything 
+
+
+
             const aboutElement = document.querySelectorAll(selectors.about)[1];
-            const about = aboutElement.innerHTML ? aboutElement.innerHTML : null;
+
+            let about = aboutElement && aboutElement.querySelector("img")
+                ? aboutElement.innerHTML
+                : null;
+
+
             return { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory, about };
         }, selectors);
 
