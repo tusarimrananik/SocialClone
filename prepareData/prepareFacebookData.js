@@ -37,7 +37,7 @@ async function prepareFacebookData(profileData) {
 
 async function setData(profileData, page) {
     await page.evaluate(async (profileData) => {
-        const { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory } = profileData;
+        const { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory, about } = profileData;
         const profilePicElement = document.querySelector('.profilePhotoImage');
         const displayNameElement = document.querySelector('.nameTop');
         const coverPhotoElement = document.querySelector('.coverPhotoImage');
@@ -48,6 +48,20 @@ async function setData(profileData, page) {
         const friendsText = document.querySelector('#friendsText');
         const friendsTextElement = document.querySelector('#friendsText');
         const isLockedElement = document.querySelector('#isLocked');
+        const aboutElement = document.querySelector('.intro');
+
+
+
+
+
+        if (about && aboutElement) {
+            aboutElement.innerHTML = about;
+            await waitForElementVisibility(aboutElement); // Wait for bio to be visible
+            aboutElement.insertAdjacentHTML('afterbegin', about);
+        }
+
+
+
 
 
         // Utility function to wait for an element to be visible

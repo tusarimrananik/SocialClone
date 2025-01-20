@@ -94,7 +94,9 @@ async function scrapeFacebook(url) {
 
             isLockedBadge: 'img.xz74otr[src="/images/wem/private_sharing/lp-badge-large-3x.png"]',
 
-            hasStory: 'div > div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div:nth-child(1) > div.x9f619.x1ja2u2z.x78zum5.x2lah0s.x1n2onr6.xl56j7k.x1qjc9v5.xozqiw3.x1q0g3np.x1l90r2v.x1ve1bff > div > div > div > div.x15sbx0n.x1xy773u.x390vds.xb2vh1x.x14xzxk9.x18u1y24.xs6kywh.x5wy4b0 > div > div > div > svg > g > circle.x1p5r69i.x17ld789'
+            hasStory: 'div > div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div:nth-child(1) > div.x9f619.x1ja2u2z.x78zum5.x2lah0s.x1n2onr6.xl56j7k.x1qjc9v5.xozqiw3.x1q0g3np.x1l90r2v.x1ve1bff > div > div > div > div.x15sbx0n.x1xy773u.x390vds.xb2vh1x.x14xzxk9.x18u1y24.xs6kywh.x5wy4b0 > div > div > div > svg > g > circle.x1p5r69i.x17ld789',
+
+            about: 'ul',
 
 
         };
@@ -107,7 +109,9 @@ async function scrapeFacebook(url) {
             page.waitForSelector(selectors.bio, { timeout: 15000 }).catch(() => null),
             page.waitForSelector(selectors.friendsCount, { timeout: 15000 }).catch(() => null),
             page.waitForSelector(selectors.isLockedBadge, { timeout: 1000 }).catch(() => null),
-            page.waitForSelector(selectors.hasStory, { timeout: 1000 }).catch(() => null)
+            page.waitForSelector(selectors.hasStory, { timeout: 1000 }).catch(() => null),
+            // page.waitForSelector(selectors.about, { timeout: 1000 }).catch(() => null),
+
         ]);
 
         // Evaluate the page and gather data
@@ -146,18 +150,16 @@ async function scrapeFacebook(url) {
                     };
                 }
             }
-
             // Locked profile check
             const isLockedElement = document.querySelector(selectors.isLockedBadge);
             const isLocked = !!isLockedElement; // Boolean check
-
-
-
             // Locked profile check
             const hasStoryElement = document.querySelector(selectors.hasStory);
             const hasStory = !!hasStoryElement; // Boolean check
-
-            return { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory };
+            //I'll do more checking to filter everything 
+            const aboutElement = document.querySelectorAll(selectors.about)[1];
+            const about = aboutElement.innerHTML ? aboutElement.innerHTML : null;
+            return { name, profilePicture, backgroundImage, bio, friendsCount, isLocked, hasStory, about };
         }, selectors);
 
         // Assign the result to the `gatheredFacebookInformations` object
@@ -168,14 +170,19 @@ async function scrapeFacebook(url) {
             bio: result.bio || null,
             friendsCount: result.friendsCount || null,
             isLocked: result.isLocked || null,
-            hasStory: result.hasStory || null
+            hasStory: result.hasStory || null,
+            about: result.about || null,
         };
 
     } catch (error) {
         console.log("Error occurred while gathering data: ", error);
     }
-    await browser.close(); // Close the browser after operations
+    // await browser.close(); // Close the browser after operations
     // Return the gathered information
+
+
+
+
     return gatheredFacebookInformations;
 
 }
