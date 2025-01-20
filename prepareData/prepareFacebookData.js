@@ -178,6 +178,14 @@ async function setData(profileData, page) {
 async function takeScreenshot(page) {
     try {
         // new Promise(resolve => setTimeout(resolve, 2000));
+
+
+        await page.evaluate(() => {
+            document.querySelector('.rootBody').style.transform = 'scale(5)'; // Scale 5x increase the resulation as much as you want here
+            document.querySelector('.rootBody').style.transformOrigin = 'top left';
+          });
+
+
         const element = await page.$('.rootBody');
         const screenshotBuffer = await element.screenshot();
         return screenshotBuffer;
