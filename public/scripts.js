@@ -43,12 +43,13 @@ facebookForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(data),
         });
         disableFormSubmit(false);
-        loadingContainer.style.display = "none";
         if (response.ok) {
             const imageSource = await response.json();
             resultImage.src = imageSource.imgSrc;
+            loadingContainer.style.display = "none";
             result.style.display = "flex";
         } else {
+            loadingContainer.style.display = "none";
             errorMessage.style.display = "block";
             const errorMessages = await response.json()
             errorMessages.error.forEach(e => {
@@ -69,7 +70,9 @@ gmailForm.addEventListener('submit', async (event) => {
         loadingContainer.style.display = "block";
         disableFormSubmit(true);
         const gmail = document.getElementById('gmailFormInput').value;
-        const data = { gmail };
+        const name = document.getElementById('nameGmailFormInput').value;
+
+        const data = { gmail, name };
         const response = await fetch('/api/gmail', {
             method: 'POST',
             headers: {
@@ -78,17 +81,19 @@ gmailForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(data),
         });
         disableFormSubmit(false);
-        loadingContainer.style.display = "none";
         if (response.ok) {
             const imageSource = await response.json();
             resultImage.src = imageSource.imgSrc;
+            loadingContainer.style.display = "none";
             result.style.display = "flex";
         } else {
-            errorMessage.style.display = "block";
+
             const errorMessages = await response.json()
             errorMessages.error.forEach(e => {
                 errorMessagText.innerHTML = `${e}`;
             });
+            loadingContainer.style.display = "none";
+            errorMessage.style.display = "block";
         }
     } catch (error) {
         console.log('Fetch error:', error);

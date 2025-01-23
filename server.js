@@ -38,3 +38,10 @@ app.post('/api/facebook', handleFacebookApiRequest);
 app.post('/api/gmail', handleGmailApiRequest);
 
 
+app.get('/api/facebook', (req, res) => {
+  res.send("dumb ass its a get request");
+});
+
+app.get('/api/gmail', (req, res) => {
+  res.send("dumb ass its a get request");
+});
